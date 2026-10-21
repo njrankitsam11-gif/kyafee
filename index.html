@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Daily Roast — Mindful Coffee & Habit Transformation</title>
+  <meta name="description" content="Replace smoking, drinking, and nervous hand fixations with the mindful, tactile sensory craft of artisanal manual coffee brewing. Complete beginner kits, gamified mood scans, and smart intake tracking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient background glow -->
+  <div class="ambient-glow-top"></div>
+
+  <!-- Persistent Header -->
+  <header class="header">
+    <div class="nav-container">
+      <a href="#" class="brand-wrapper">
+        <div class="brand-logo-icon">R</div>
+        <div>
+          <span class="brand-title">THE DAILY ROAST</span>
+          <span class="brand-tagline">Mindful Extraction • Habit Reset</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#editorial" class="nav-link">The Stories</a></li>
+        <li><a href="#science" class="nav-link">Habit Science</a></li>
+        <li><a href="#tracker" class="nav-link">Intake Tracker</a></li>
+        <li><a href="#kits" class="nav-link">Ritual Kits</a></li>
+        <li><a href="#replenish" class="nav-link">Smart Refill</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-panic" onclick="openPanicBrewModal()">
+          <span>⚡</span> Panic Brew (Craving SOS)
+        </button>
+        <button class="btn-primary" onclick="openQuizModal()">
+          Mood & Taste Scan
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       HERO EDITORIAL SECTION: 3D ILLUSTRATED CAROUSEL (six2eight aesthetic)
+       ========================================================================= -->
+  <section class="hero-editorial-section" id="editorial">
+    <div class="hero-header-box">
+      <div class="hero-pill-badge">
+        <span>☕</span> Behavioral Psychology Meets Line-Art Editorial
+      </div>
+
+      <h1 class="hero-headline">
+        Keep Your Hands Busy.<br>
+        <span class="cream-highlight">Give Your Brain Better Rewards.</span>
+      </h1>
+
+      <p class="hero-subhead">
+        Transform nervous tension into morning mastery. Replace cigarettes, alcohol, and digital fidgeting with the grounding tactile craft of manual coffee extraction.
+      </p>
+
+      <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+        <button class="btn-primary" style="padding:0.9rem 1.85rem; font-size:1rem;" onclick="openQuizModal()">
+          Take the Mood & Taste Scan (60s)
+        </button>
+        <a href="#kits" class="btn-secondary" style="padding:0.9rem 1.85rem; font-size:1rem;">
+          Explore Tactile Starter Kits
+        </a>
+      </div>
+    </div>
+
+    <!-- The 3D Elevated Cream Card Carousel -->
+    <div class="carousel-viewport">
+      <div class="carousel-track" id="carouselTrack">
+        
+        <!-- CARD 0: The Screen Slump & Nervous Craving -->
+        <div class="illustrated-card inactive" onclick="setCarouselCard(0)">
+          <div class="card-tag-pill">01 • The Anxious Loop</div>
+          
+          <div class="card-illustration-frame">
+            <svg viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Chair / Stool -->
+              <ellipse cx="120" cy="210" rx="36" ry="12" stroke="#24140c" stroke-width="2.5"/>
+              <line x1="120" y1="210" x2="120" y2="255" stroke="#24140c" stroke-width="2.5"/>
+              <line x1="105" y1="210" x2="95" y2="255" stroke="#24140c" stroke-width="2.5"/>
+              <line x1="135" y1="210" x2="145" y2="255" stroke="#24140c" stroke-width="2.5"/>
+
+              <!-- Person Sitting Cross-Legged with Device -->
+              <!-- Legs in dark baggy pants -->
+              <path d="M100 170 C90 190 90 205 130 205 C150 205 160 195 185 205 C195 210 205 215 210 220" stroke="#24140c" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M100 160 C120 160 135 185 155 190 C175 195 190 185 195 175" stroke="#24140c" stroke-width="20" stroke-linecap="round"/>
+
+              <!-- Sneakers -->
+              <path d="M185 220 C190 220 215 220 225 228 C225 233 180 233 180 228 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+              <path d="M185 228 L215 228" stroke="#24140c" stroke-width="2"/>
+              <circle cx="205" cy="224" r="2" fill="#24140c"/>
+
+              <!-- Torso & Slouch -->
+              <path d="M110 145 C105 115 125 105 145 105" stroke="#24140c" stroke-width="2.5" fill="none"/>
+              <path d="M135 105 C145 130 140 155 135 165" stroke="#24140c" stroke-width="2.5"/>
+
+              <!-- Head & Messy Hair -->
+              <circle cx="140" cy="80" r="15" fill="#fbf5ee" stroke="#24140c" stroke-width="2.5"/>
+              <path d="M130 75 C132 65 145 65 152 70 C155 75 155 82 150 86 C145 88 135 88 130 75 Z" fill="#24140c"/>
+
+              <!-- Arms Holding Tablet / Glowing Phone -->
+              <path d="M125 115 C135 125 145 130 155 130" stroke="#24140c" stroke-width="2.5"/>
+              <!-- Tablet / Screen -->
+              <rect x="150" y="110" width="32" height="42" rx="4" transform="rotate(15 150 110)" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+              
+              <!-- Cigarette smoke / vape wisp drifting up -->
+              <path d="M195 120 C205 110 200 95 210 85 C220 75 215 60 225 50" stroke="#24140c" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3"/>
+              
+              <!-- Overflowing takeout coffee cups on ground -->
+              <path d="M70 245 L74 225 L88 225 L92 245 Z" fill="#ffffff" stroke="#24140c" stroke-width="2"/>
+              <line x1="72" y1="225" x2="90" y2="225" stroke="#24140c" stroke-width="2"/>
+              <path d="M50 248 L53 235 L63 235 L66 248 Z" fill="#ffffff" stroke="#24140c" stroke-width="1.8"/>
+            </svg>
+          </div>
+
+          <div class="card-info">
+            <h3 class="card-title">The Anxious Screen Slump</h3>
+            <p class="card-subtitle">Fidgety fingers, cigarette smoke breaks, and empty cardboard cups. High cortisol with zero presence.</p>
+          </div>
+        </div>
+
+        <!-- CARD 1: The Spilling Giant Cup (Exact match to reference photo!) -->
+        <div class="illustrated-card active" onclick="setCarouselCard(1)">
+          <div class="card-tag-pill">02 • The Kinetic Rush</div>
+
+          <div class="card-illustration-frame">
+            <svg viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Standing Walking Girl (from reference) -->
+              <!-- Dark Wide-Leg Pants -->
+              <!-- Left Leg -->
+              <path d="M152 145 C152 165 148 200 145 225 L156 226 C160 200 165 170 166 145 Z" fill="#24140c" stroke="#24140c" stroke-width="1.5"/>
+              <!-- Right Leg (stepping forward) -->
+              <path d="M165 145 C168 170 175 195 182 220 L193 218 C185 190 176 165 173 145 Z" fill="#24140c" stroke="#24140c" stroke-width="1.5"/>
+
+              <!-- Sneakers -->
+              <!-- Left foot sneaker -->
+              <path d="M136 228 C140 225 152 225 158 227 C160 233 133 235 136 228 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+              <path d="M142 227 L152 227" stroke="#24140c" stroke-width="2"/>
+              <!-- Right foot sneaker -->
+              <path d="M178 222 C184 218 195 218 200 221 C202 227 175 229 178 222 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+              <path d="M182 221 L194 221" stroke="#24140c" stroke-width="2"/>
+
+              <!-- Belt & Waist -->
+              <rect x="150" y="140" width="24" height="6" rx="2" fill="#24140c"/>
+              <rect x="159" y="141" width="6" height="4" fill="#fbf5ee"/>
+
+              <!-- White Short-Sleeve Blouse / Shirt -->
+              <path d="M148 110 C140 120 142 140 152 142 C162 143 174 142 176 142 C180 130 178 120 170 110 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+              <!-- Shirt collar -->
+              <path d="M155 110 L160 118 L165 110" stroke="#24140c" stroke-width="2"/>
+
+              <!-- Tote Bag on Left Arm with Baguette -->
+              <path d="M135 145 C132 155 132 170 135 182 C135 186 150 186 150 182 L147 145 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+              <path d="M138 145 C138 135 144 135 144 145" stroke="#24140c" stroke-width="2"/>
+              <!-- Baguette poking out -->
+              <path d="M134 142 C130 135 132 128 137 132 C142 136 140 144 137 146" fill="#fbf5ee" stroke="#24140c" stroke-width="2"/>
+              <line x1="133" y1="135" x2="136" y2="133" stroke="#24140c" stroke-width="1.5"/>
+
+              <!-- Head, Bun / Ponytail & Face Profile -->
+              <path d="M158 95 C158 86 166 84 170 88 C173 92 171 100 166 102 C162 102 158 100 158 95 Z" fill="#fbf5ee" stroke="#24140c" stroke-width="2.2"/>
+              <!-- Hair & High Ponytail -->
+              <path d="M158 94 C156 86 164 82 168 83 C171 85 171 92 168 95 C163 95 159 96 158 94 Z" fill="#24140c"/>
+              <path d="M158 88 C150 86 148 92 154 94 C156 95 158 93 158 88 Z" fill="#24140c"/>
+
+              <!-- Right Arm Holding the GIANT COFFEE CUP -->
+              <path d="M168 115 C176 122 185 125 192 125" stroke="#24140c" stroke-width="2.5"/>
+
+              <!-- THE GIANT COFFEE CUP (Centerpiece from reference!) -->
+              <!-- Cup Body -->
+              <path d="M188 110 L195 175 C195 178 225 178 225 175 L232 110 Z" fill="#ffffff" stroke="#24140c" stroke-width="3"/>
+              <!-- Dark Cup Sleeve -->
+              <path d="M191 128 L193 155 C193 157 227 157 227 155 L229 128 Z" fill="#24140c" stroke="#24140c" stroke-width="2"/>
+              <!-- Cup Lid -->
+              <ellipse cx="210" cy="110" rx="23" ry="5" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+
+              <!-- SPLASHING COFFEE & HEART LIQUID DROPS! (Signature from photo) -->
+              <!-- Big Spurt / Splash -->
+              <path d="M208 106 C206 95 210 85 220 80 C228 75 235 88 226 95 C222 98 214 105 210 106 Z" fill="#24140c"/>
+              <!-- Heart-shaped coffee splash top -->
+              <path d="M220 82 C216 75 224 68 228 74 C232 68 240 75 236 82 C232 88 228 92 228 92 C228 92 224 88 220 82 Z" fill="#24140c"/>
+              <!-- Splashing Drops -->
+              <path d="M236 95 C242 98 244 110 238 114 C235 110 233 100 236 95 Z" fill="#24140c"/>
+              <ellipse cx="242" cy="120" rx="3.5" ry="5" fill="#24140c"/>
+              <circle cx="230" cy="85" r="2.5" fill="#24140c"/>
+
+              <!-- Motion ground shadow lines -->
+              <line x1="135" y1="236" x2="155" y2="236" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
+              <line x1="180" y1="230" x2="205" y2="230" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="card-info">
+            <h3 class="card-title">The Kinetic Rush</h3>
+            <p class="card-subtitle">Restless energy seeking an outlet. Carrying giant coffee cups while rushing between meetings and cravings.</p>
+          </div>
+        </div>
+
+        <!-- CARD 2: The Giant Cup Bathtub & IV Drip (Exact match to reference photo!) -->
+        <div class="illustrated-card inactive" onclick="setCarouselCard(2)">
+          <div class="card-tag-pill">03 • The Coffee IV Reset</div>
+
+          <div class="card-illustration-frame">
+            <svg viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- GIANT COFFEE CUP BATHTUB (from right card in reference!) -->
+              <!-- Cup Body as Bathtub -->
+              <path d="M125 150 C125 215 130 240 220 240 C270 240 275 215 275 150 Z" fill="#ffffff" stroke="#24140c" stroke-width="3"/>
+              <!-- Dark Sleeve Band -->
+              <path d="M127 185 C127 215 135 225 220 225 C265 225 273 215 273 185 Z" fill="#24140c"/>
+              <!-- Tub Rim -->
+              <ellipse cx="200" cy="150" rx="75" ry="14" fill="#ffffff" stroke="#24140c" stroke-width="3"/>
+              <!-- Coffee Liquid Level inside tub -->
+              <ellipse cx="200" cy="154" rx="70" ry="10" fill="#24140c"/>
+
+              <!-- Person Relaxing in the Coffee Tub -->
+              <!-- Head leaning back on rim -->
+              <circle cx="240" cy="130" r="14" fill="#fbf5ee" stroke="#24140c" stroke-width="2.2"/>
+              <!-- Hair -->
+              <path d="M232 125 C232 118 242 116 248 120 C252 124 250 132 246 134 Z" fill="#24140c"/>
+              <!-- Relaxed smiling eye -->
+              <path d="M242 130 C244 132 246 132 248 130" stroke="#24140c" stroke-width="1.8" stroke-linecap="round"/>
+              <!-- Shoulders & Arm resting over rim -->
+              <path d="M230 144 C225 148 215 148 210 148 C205 148 200 152 205 156" stroke="#24140c" stroke-width="2.5" stroke-linecap="round"/>
+
+              <!-- THE IV DRIP STAND WITH UPSIDE DOWN COFFEE CUP! (Signature from photo) -->
+              <!-- Tall Metal Stand -->
+              <line x1="85" y1="60" x2="85" y2="245" stroke="#24140c" stroke-width="2.5"/>
+              <!-- Stand Base Feet -->
+              <line x1="65" y1="245" x2="105" y2="245" stroke="#24140c" stroke-width="2.5"/>
+              <line x1="72" y1="240" x2="98" y2="250" stroke="#24140c" stroke-width="2"/>
+              <!-- Top Hanger Hooks -->
+              <path d="M85 70 C75 70 70 80 70 88" stroke="#24140c" stroke-width="2" fill="none"/>
+              <path d="M85 70 C95 70 100 80 100 88" stroke="#24140c" stroke-width="2" fill="none"/>
+
+              <!-- Inverted Coffee Cup Bag / Drip Dispenser -->
+              <!-- Hanging Wire -->
+              <line x1="70" y1="88" x2="70" y2="98" stroke="#24140c" stroke-width="1.5"/>
+              <!-- Small Cup -->
+              <path d="M60 100 L64 135 C64 138 86 138 86 135 L90 100 Z" fill="#ffffff" stroke="#24140c" stroke-width="2"/>
+              <!-- Dark Sleeve on small cup -->
+              <rect x="62" y="112" width="26" height="14" fill="#24140c"/>
+              <ellipse cx="75" cy="100" rx="15" ry="3.5" fill="#ffffff" stroke="#24140c" stroke-width="2"/>
+
+              <!-- IV Tube looping from dispenser cup into the person in bathtub! -->
+              <path d="M75 138 C75 175 105 210 140 185 C165 170 190 165 220 156" stroke="#24140c" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+
+          <div class="card-info">
+            <h3 class="card-title">The Coffee IV Reset</h3>
+            <p class="card-subtitle">Soaking in the dopamine of fresh specialty extraction. Rewiring your habit loop from vice to sensory pleasure.</p>
+          </div>
+        </div>
+
+        <!-- CARD 3: The Mindful Burr Meditation -->
+        <div class="illustrated-card inactive" onclick="setCarouselCard(3)">
+          <div class="card-tag-pill">04 • The Mindful Grind</div>
+
+          <div class="card-illustration-frame">
+            <svg viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Character Joyfully Grinding Manual Burr Grinder -->
+              <!-- Wooden Table -->
+              <line x1="40" y1="230" x2="280" y2="230" stroke="#24140c" stroke-width="3"/>
+              
+              <!-- Manual Aluminum Burr Grinder -->
+              <rect x="140" y="145" width="40" height="85" rx="6" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+              <rect x="140" y="175" width="40" height="25" fill="#24140c"/> <!-- Knurled grip band -->
+              <!-- Grinder Crank Handle -->
+              <line x1="160" y1="145" x2="160" y2="128" stroke="#24140c" stroke-width="3"/>
+              <line x1="160" y1="128" x2="195" y2="128" stroke="#24140c" stroke-width="3"/>
+              <circle cx="195" cy="128" r="7" fill="#24140c"/>
+
+              <!-- Character's Hands actively turning crank -->
+              <!-- Left hand gripping grinder body -->
+              <path d="M125 180 C132 175 140 178 140 185 C140 192 132 195 125 190" stroke="#24140c" stroke-width="2.5"/>
+              <!-- Right hand on crank knob -->
+              <circle cx="195" cy="124" r="9" fill="#fbf5ee" stroke="#24140c" stroke-width="2"/>
+
+              <!-- Flying Whole Coffee Beans dancing with joy -->
+              <ellipse cx="115" cy="115" rx="7" ry="10" transform="rotate(-25 115 115)" fill="#24140c"/>
+              <path d="M115 107 C113 115 117 115 115 123" stroke="#fbf5ee" stroke-width="1.5"/>
+
+              <ellipse cx="215" cy="105" rx="6" ry="9" transform="rotate(35 215 105)" fill="#24140c"/>
+              <path d="M215 98 C213 105 217 105 215 112" stroke="#fbf5ee" stroke-width="1.5"/>
+
+              <!-- Rising Aromatic Swirls (Engaging Olfactory System) -->
+              <path d="M160 110 C155 90 170 80 160 65 C150 50 165 40 155 25" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
+              <path d="M175 110 C185 95 175 80 185 65" stroke="#24140c" stroke-width="1.8" stroke-linecap="round"/>
+
+              <!-- Little Heart Droplets -->
+              <path d="M140 50 C136 45 142 40 145 44 C148 40 154 45 150 50 C148 53 145 56 145 56 C145 56 142 53 140 50 Z" fill="#24140c"/>
+            </svg>
+          </div>
+
+          <div class="card-info">
+            <h3 class="card-title">The Mindful Grind</h3>
+            <p class="card-subtitle">Stepped burrs crush fresh beans with an audible crunch. Your hands are busy, your brain is grounded.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Carousel Controls Navigation -->
+    <div class="carousel-nav-bar">
+      <button class="carousel-arrow-btn" onclick="prevCarouselCard()">‹</button>
+      <div class="carousel-dots">
+        <div class="carousel-dot" onclick="setCarouselCard(0)"></div>
+        <div class="carousel-dot active" onclick="setCarouselCard(1)"></div>
+        <div class="carousel-dot" onclick="setCarouselCard(2)"></div>
+        <div class="carousel-dot" onclick="setCarouselCard(3)"></div>
+      </div>
+      <button class="carousel-arrow-btn" onclick="nextCarouselCard()">›</button>
+    </div>
+
+    <!-- Live Habit Metrics Ticker -->
+    <div class="stats-ticker">
+      <div class="stat-item">
+        <span class="stat-num" id="globalCravingsStat">4,820+</span>
+        <span class="stat-label">Cravings Diverted This Month</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">18.5g</span>
+        <span class="stat-label">Dopamine-Anchored Single Origin Dose</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">94.2%</span>
+        <span class="stat-label">Report Oral & Hand Fixation Relief</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">4.5 Min</span>
+        <span class="stat-label">Active Flow-State Extraction Time</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Habit Science & Sensory Replacement -->
+  <section class="section" id="science">
+    <div class="section-header">
+      <span class="section-eyebrow">The Brain-Triggering Hook</span>
+      <h2 class="section-title">Your Hands Aren't Addicted.<br>Your Brain Is Craving a Sensory Break.</h2>
+      <p class="section-desc">
+        Under the neurobiology of habit loops, vices survive through motor habits (hand-to-mouth motion) and anticipatory dopamine. We replace destructive chemicals with tactile precision.
+      </p>
+    </div>
+
+    <div class="comparison-grid">
+      <!-- The Addictive Habit Loop Card -->
+      <div class="habit-card bad">
+        <span class="habit-tag">The Addictive Loop (Nicotine / Alcohol)</span>
+        <h3 class="habit-name">Destructive Chemical Spikes</h3>
+        
+        <div class="habit-card-illustration">
+          <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Ashtray / Smoke / Spilled drink -->
+            <ellipse cx="100" cy="95" rx="55" ry="18" fill="#e6dacd" stroke="#24140c" stroke-width="2.5"/>
+            <ellipse cx="100" cy="92" rx="42" ry="12" fill="#24140c" opacity="0.15"/>
+            <!-- Cigarette butt -->
+            <rect x="75" y="80" width="30" height="7" rx="3" transform="rotate(-15 75 80)" fill="#ffffff" stroke="#24140c" stroke-width="2"/>
+            <rect x="75" y="80" width="8" height="7" rx="2" transform="rotate(-15 75 80)" fill="#c53030"/>
+            <!-- Rising acrid smoke -->
+            <path d="M102 75 C108 60 98 45 106 30 C114 15 108 5 116 -5" stroke="#24140c" stroke-width="2" stroke-dasharray="3 3"/>
+            <!-- Lightning jitter icon -->
+            <path d="M150 40 L140 60 L152 60 L142 85" stroke="#c53030" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <ul class="habit-list">
+          <li class="habit-list-item">
+            <span class="habit-icon">🚬</span>
+            <div>
+              <strong>Motor & Oral Fixation:</strong>
+              <span>Flicking a lighter, nervous fingers, oral inhalation to relieve restlessness.</span>
+            </div>
+          </li>
+          <li class="habit-list-item">
+            <span class="habit-icon">📉</span>
+            <div>
+              <strong>Passive Dopamine Crash:</strong>
+              <span>Artificial rush creates receptor burnout, restlessness, and anxiety 45 minutes later.</span>
+            </div>
+          </li>
+          <li class="habit-list-item">
+            <span class="habit-icon">⏳</span>
+            <div>
+              <strong>Mindless Avoidance:</strong>
+              <span>5 minutes of escapism that leaves your nervous system depleted.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- The Daily Roast Replacement Loop Card -->
+      <div class="habit-card good">
+        <span class="habit-tag">The Daily Roast Ritual</span>
+        <h3 class="habit-name">Earned Tactile Flow State</h3>
+
+        <div class="habit-card-illustration">
+          <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Pour over cone & server -->
+            <path d="M80 30 L120 30 L108 65 L92 65 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+            <!-- Server Carafe -->
+            <path d="M88 68 L112 68 L124 105 C124 108 76 108 76 105 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+            <!-- Fresh Coffee Level -->
+            <path d="M84 92 L116 92 L120 105 L80 105 Z" fill="#24140c"/>
+            <!-- Concentric Water Drops -->
+            <circle cx="100" cy="45" r="4" fill="#24140c"/>
+            <path d="M100 52 L100 56" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
+            <!-- Blooming steam -->
+            <path d="M125 35 C132 25 130 15 136 5" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="140" cy="18" r="3" fill="#24140c"/>
+          </svg>
+        </div>
+
+        <ul class="habit-list">
+          <li class="habit-list-item">
+            <span class="habit-icon">⚙️</span>
+            <div>
+              <strong>Bilateral Hand Grounding:</strong>
+              <span>Gripping knurled aircraft aluminum; audible steel burr clicks crush whole beans.</span>
+            </div>
+          </li>
+          <li class="habit-list-item">
+            <span class="habit-icon">✨</span>
+            <div>
+              <strong>Earned Dopamine Reward:</strong>
+              <span>Hitting exactly 0.1g water targets and unlocking aromatic stone fruit & cacao notes.</span>
+            </div>
+          </li>
+          <li class="habit-list-item">
+            <span class="habit-icon">🧘</span>
+            <div>
+              <strong>Circadian Mindful Zen:</strong>
+              <span>Active kinetic meditation that quiets cortisol without chemical hangovers.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Interactive Sensory Soundboard -->
+    <div class="soundboard-box">
+      <h3 class="soundboard-title">🎧 Interactive Sensory Haptics Simulator</h3>
+      <p class="soundboard-desc">Tap each sensory trigger below to experience the acoustic and tactile cues engineered to satisfy nervous motor fixations.</p>
+      
+      <div class="soundboard-buttons">
+        <button class="sound-btn" id="btnSoundGrind">
+          <span>⚙️</span> Grinder Burr Resistance (Crunch)
+        </button>
+        <button class="sound-btn" id="btnSoundScale">
+          <span>⚖️</span> 0.1g Scale Tare (Precision Beep)
+        </button>
+        <button class="sound-btn" id="btnSoundBloom">
+          <span>🌊</span> Water Bloom Expansion (Sizzle)
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: The Smart Intake Tracker & Gamified Dashboard -->
+  <section class="section" id="tracker">
+    <div class="section-header">
+      <span class="section-eyebrow">Behavioral Gamification</span>
+      <h2 class="section-title">The Smart Intake Tracker & Mind Dashboard</h2>
+      <p class="section-desc">
+        Log your daily extractions, monitor your healthy circadian boundaries, and track every single vice craving diverted into mindful craft.
+      </p>
+    </div>
+
+    <div class="dashboard-container">
+      <!-- Top Profile Row -->
+      <div class="dash-topbar">
+        <div class="dash-user-profile">
+          <div class="user-avatar-illustrated">
+            <svg viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="40" r="20" fill="#24140c"/>
+              <path d="M25 85 C25 65 35 60 50 60 C65 60 75 65 75 85 Z" fill="#24140c"/>
+            </svg>
+          </div>
+          <div>
+            <div style="display:flex; align-items:center; gap:0.6rem;">
+              <span class="user-name-title" id="profileName">Alex M.</span>
+              <span class="user-class-pill" id="profileArchetype">Pour-Over Paladin</span>
+            </div>
+            <span style="font-size:0.78rem; color:var(--text-muted);">Level 1 Novice • Mindful Extraction Journey</span>
+          </div>
+        </div>
+
+        <div class="dash-controls">
+          <button class="btn-primary" onclick="showLogCupModal()">
+            + Log a Brewed Cup
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Dashboard Grid -->
+      <div class="dash-grid">
+        <!-- Visual Caffeine & Mind Balance Meter -->
+        <div class="meter-card">
+          <div>
+            <div class="meter-header">
+              <div>
+                <h4 class="meter-title">Caffeine & Circadian Balance Meter</h4>
+                <span style="font-size:0.75rem; color:var(--text-muted-on-cream);">Recommended Cap: 350mg / Day</span>
+              </div>
+              <span class="meter-status-pill status-optimal" id="meterStatusPill">Optimal Flow State</span>
+            </div>
+
+            <div class="gauge-visual">
+              <div class="gauge-track">
+                <div class="gauge-fill" id="caffeineGaugeFill" style="width: 60%;"></div>
+              </div>
+              <div class="gauge-markers">
+                <span>0mg (Rest)</span>
+                <span>200mg (Sweet Spot)</span>
+                <span>350mg (Safe Cap)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="meter-stats-row">
+            <div class="meter-stat-col">
+              <div class="meter-stat-val" id="caffeineCurrent">210mg</div>
+              <div class="meter-stat-desc">Intake Today</div>
+            </div>
+            <div class="meter-stat-col">
+              <div class="meter-stat-val">02:30 PM</div>
+              <div class="meter-stat-desc">Circadian Cutoff</div>
+            </div>
+            <div class="meter-stat-col">
+              <div class="meter-stat-val">5.0 hrs</div>
+              <div class="meter-stat-desc">Metabolic Half-Life</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Craving Replacement Metrics -->
+        <div class="replacement-card">
+          <h4 class="meter-title" style="margin-bottom:0.5rem;">Habit Replacement Scoreboard</h4>
+          <span style="font-size:0.75rem; color:var(--text-muted-on-cream);">Every logged cup represents a conscious neural detour.</span>
+
+          <div class="rep-stat-grid">
+            <div class="rep-box">
+              <div class="rep-num" id="streakCount">14</div>
+              <div class="rep-label">Days Smoke/Drink-Free Streak</div>
+            </div>
+            <div class="rep-box">
+              <div class="rep-num" id="cravingsCount">42</div>
+              <div class="rep-label">Vice Cravings Diverted</div>
+            </div>
+            <div class="rep-box">
+              <div class="rep-num" id="ritualMinutes">210m</div>
+              <div class="rep-label">Tactile Mindful Time Earned</div>
+            </div>
+            <div class="rep-box">
+              <div class="rep-num" style="color:var(--status-green);">+$98</div>
+              <div class="rep-label">Money Saved from Vices</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Just-In-Time Bean Replenishment Live Status Bar -->
+      <div class="replenishment-bar-card" id="replenish">
+        <div class="rep-bar-header">
+          <div>
+            <div class="rep-bar-title">Active Batch: <span id="repBagName" style="color:var(--accent-amber);">Ethiopia Yirgacheffe (Washed)</span></div>
+            <span style="font-size:0.78rem; color:var(--text-muted-on-cream);" id="repCupsBrewed">12 / 16 cups brewed (250g bag)</span>
+          </div>
+          <button class="btn-secondary" style="font-size:0.8rem; padding:0.45rem 1rem;" onclick="showRefillModal()">
+            Preview Smart Refill Trigger
+          </button>
+        </div>
+
+        <div class="rep-progress-track">
+          <div class="rep-progress-fill" id="repProgressFill" style="width: 75%;"></div>
+        </div>
+
+        <div style="font-size:0.85rem; color:var(--text-muted-on-cream);" id="repStatusNotice">
+          ⚠️ <strong style="color:var(--accent-amber);">Low Supply Alert:</strong> 4 cups remaining. Our Just-In-Time dispatch algorithm recommends queuing your next batch today.
+        </div>
+      </div>
+
+      <!-- Unlockable Badges Grid -->
+      <div class="badges-container">
+        <div class="badges-header">
+          <span>Beginner Milestone Badges</span>
+          <span style="font-size:0.85rem; color:var(--accent-gold); font-weight:700;">5 / 8 Unlocked</span>
+        </div>
+        <div class="badge-grid" id="badgeGrid">
+          <!-- Populated dynamically by app.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Just-In-Time Smart Refill Mechanics -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-eyebrow">Zero-Friction Retention</span>
+      <h2 class="section-title">Just-In-Time Fresh Bean Replenishment</h2>
+      <p class="section-desc">
+        The tracker calculates your exact depletion rate (15g per cup). When you hit Cup #12 of your 250g bag, our smart delivery system dispatches your next freshly roasted bag so it arrives 24 hours before your last bean.
+      </p>
+    </div>
+
+    <div class="refill-trigger-box">
+      <div>
+        <span class="section-eyebrow" style="color:var(--accent-amber);">Smart Delivery Lifecycle Engine</span>
+        <h3 style="font-family:var(--font-serif); font-size:1.85rem; font-weight:800; color:var(--ink-espresso); margin-bottom:1rem;">Never Fall Back to Old Vices Due to an Empty Hopper</h3>
+        <p style="font-size:0.95rem; color:var(--text-muted-on-cream); margin-bottom:1.75rem; line-height:1.6;">
+          Running out of fresh coffee creates a friction void where old habits sneak back in. The Daily Roast eliminates subscriptions with arbitrary dates—replenishment happens based purely on your real-time logged consumption.
+        </p>
+        <button class="btn-primary" onclick="showRefillModal()">
+          Simulate Smart Refill Trigger
+        </button>
+      </div>
+
+      <!-- Interactive Mock Phone Notification -->
+      <div class="mock-notification">
+        <div class="mock-notif-header">
+          <span class="app-icon"></span>
+          <span>THE DAILY ROAST • JUST-IN-TIME REFILL ALERT</span>
+        </div>
+        <div class="mock-notif-body">
+          <strong>Your hopper is getting light, Alex.</strong>
+          <p>
+            You just logged Cup #12 of your Ethiopia Yirgacheffe. Based on your 1.2 cup/day average, you will run dry by Thursday afternoon.
+          </p>
+          <p style="color:var(--accent-gold); font-weight:700;">
+            Next in queue: Colombia Huila (Roasted 48h ago • Brown Sugar & Peach notes).
+          </p>
+        </div>
+        <div class="mock-notif-actions">
+          <button class="mock-btn-sm" onclick="confirmSmartRefill()">1-Tap Confirm ($18)</button>
+          <button class="btn-secondary" style="font-size:0.75rem; padding:0.4rem 0.85rem;" onclick="showToast('Preferences Updated', 'Alternate origins will be suggested.', '🔄')">Switch Flavor</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Beginner Product Kits Storefront -->
+  <section class="section" id="kits">
+    <div class="section-header">
+      <span class="section-eyebrow">Sensory Hardware</span>
+      <h2 class="section-title">The Beginner Starter Ritual Kits</h2>
+      <p class="section-desc">
+        Curated for maximum tactile feedback, satisfying acoustics, and zero intimidation. Everything you need to rewire your morning and afternoon breaks.
+      </p>
+    </div>
+
+    <div class="kits-grid">
+      <!-- Kit 1: Tactile Pour-Over Starter Ritual Kit (Featured) -->
+      <div class="kit-card featured">
+        <div class="kit-badge-top">Most Popular • Pour-Over Paladin Kit</div>
+        <div class="kit-illustration-wrapper">
+          <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Dripper & Grinder Line Art -->
+            <rect x="50" y="50" width="35" height="80" rx="4" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+            <rect x="50" y="80" width="35" height="20" fill="#24140c"/>
+            <line x1="67" y1="50" x2="67" y2="35" stroke="#24140c" stroke-width="2.5"/>
+            <line x1="67" y1="35" x2="95" y2="35" stroke="#24140c" stroke-width="2.5"/>
+            <circle cx="95" cy="35" r="5" fill="#24140c"/>
+
+            <!-- Dripper on Server -->
+            <path d="M125 45 L175 45 L160 85 L140 85 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+            <path d="M135 90 L165 90 L175 135 L125 135 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+            <path d="M130 115 L170 115 L174 135 L126 135 Z" fill="#24140c"/>
+            <circle cx="150" cy="62" r="3" fill="#24140c"/>
+          </svg>
+        </div>
+        <div class="kit-details">
+          <h3 class="kit-title">The Tactile Starter Ritual Kit</h3>
+          <div class="kit-price">$89 <span style="font-size:0.85rem; color:var(--text-muted-on-cream); font-weight:400;">(or $48 w/out scale)</span></div>
+          <p style="font-size:0.9rem; color:var(--text-muted-on-cream); margin-bottom:1.5rem;">
+            Engineered specifically to ground restless hands. Replaces cigarette lighter rituals with micro-stepped steel burrs and calming spiral pours.
+          </p>
+          <ul class="kit-features">
+            <li class="kit-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span><strong>Haptic Burr Grinder:</strong> CNC aluminum body with audible tactile click adjustments.</span>
+            </li>
+            <li class="kit-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span><strong>Matte Ceramic V-Dripper:</strong> Heavy thermal mass provides deep soothing warmth.</span>
+            </li>
+            <li class="kit-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span><strong>0.1g Precision Haptic Scale:</strong> Instant visual feedback and tactile button snap.</span>
+            </li>
+            <li class="kit-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span><strong>250g First Roast Batch:</strong> Matched directly to your palate scan.</span>
+            </li>
+          </ul>
+          <button class="btn-primary" style="width:100%; justify-content:center;" onclick="addToCart('The Tactile Starter Ritual Kit', 89)">
+            Claim Your Starter Kit ($89)
+          </button>
+        </div>
+      </div>
+
+      <!-- Kit 2: Kinetic Aeropress Craving Buster -->
+      <div class="kit-card">
+        <div class="kit-illustration-wrapper">
+          <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Aeropress Cylinder & Plunger -->
+            <rect x="95" y="40" width="50" height="90" rx="3" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+            <rect x="105" y="15" width="30" height="40" rx="2" fill="#24140c" stroke="#24140c" stroke-width="2"/>
+            <ellipse cx="120" cy="15" rx="25" ry="5" fill="#24140c"/>
+            <rect x="90" y="130" width="60" height="15" rx="3" fill="#24140c"/>
+            <!-- Mug underneath -->
+            <path d="M100 148 L140 148 L136 170 L104 170 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.2"/>
+            <!-- Plunge force arrows -->
+            <path d="M75 35 L75 55 L70 50 M75 55 L80 50" stroke="#bd5938" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M165 35 L165 55 L160 50 M165 55 L170 50" stroke="#bd5938" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="kit-details">
+          <h3 class="kit-title">The Kinetic Aeropress Bundle</h3>
+          <div class="kit-price">$68</div>
+          <p style="font-size:0.9rem; color:var(--text-muted-on-cream); margin-bottom:1.5rem;">
+            Designed for high-intensity stress moments. The deliberate physical resistance of the manual plunge discharges physical adrenaline and craving tension.
+          </p>
+          <ul class="kit-features">
+            <li class="kit-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span><strong>Original Aeropress Chamber:</strong> Unbreakable, ergonomic, high-tactile plunge.</span>
+            </li>
+            <li class="kit-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span><strong>Laser-Etched Metal Mesh:</strong> Creates rich, heavy oils to mimic cocktail mouthfeel.</span>
+            </li>
+            <li class="kit-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span><strong>Compact Pocket Grinder:</strong> Carry it to work to defeat the 3 PM smoke break.</span>
+            </li>
+          </ul>
+          <button class="btn-secondary" style="width:100%; justify-content:center; margin-top:auto;" onclick="addToCart('Kinetic Aeropress Bundle', 68)">
+            Select Aeropress Bundle ($68)
+          </button>
+        </div>
+      </div>
+
+      <!-- Kit 3: Evening Decaf Reset (Nightcap Swap) -->
+      <div class="kit-card">
+        <div class="kit-illustration-wrapper">
+          <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cozy Evening Stoneware Mug with Steam & Crescent Moon -->
+            <path d="M85 75 L155 75 L145 145 C145 152 95 152 95 145 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
+            <!-- Mug Handle -->
+            <path d="M150 85 C170 85 170 125 146 125" stroke="#24140c" stroke-width="2.5" fill="none"/>
+            <!-- Coffee Level -->
+            <ellipse cx="120" cy="85" rx="30" ry="6" fill="#24140c"/>
+            <!-- Steam -->
+            <path d="M110 65 C105 50 115 40 110 25" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
+            <path d="M125 65 C130 50 120 40 125 25" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
+            <!-- Crescent Moon -->
+            <path d="M175 40 C170 30 180 20 185 20 C175 22 170 32 175 40 Z" fill="#24140c"/>
+          </svg>
+        </div>
+        <div class="kit-details">
+          <h3 class="kit-title">The Evening Nightcap Reset</h3>
+          <div class="kit-price">$54</div>
+          <p style="font-size:0.9rem; color:var(--text-muted-on-cream); margin-bottom:1.5rem;">
+            Replace the 8 PM alcohol decompression ritual. 99.9% caffeine-free Swiss Water single origins with dark cacao and toasted hazelnut profiles.
+          </p>
+          <ul class="kit-features">
+            <li class="kit-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span><strong>Heavy Stoneware Mug:</strong> Weighted ergonomics for sensory comfort.</span>
+            </li>
+            <li class="kit-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span><strong>2x Swiss-Water Single Origins:</strong> Deep, unctuous body without insomnia or alcohol rebound.</span>
+            </li>
+            <li class="kit-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              <span><strong>Evening Wind-down Audio Guide:</strong> 5-minute mindfulness narrative.</span>
+            </li>
+          </ul>
+          <button class="btn-secondary" style="width:100%; justify-content:center; margin-top:auto;" onclick="addToCart('Evening Nightcap Reset', 54)">
+            Select Nightcap Reset ($54)
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL 1: Mood & Taste Scan (Gamified Onboarding) -->
+  <div class="modal-overlay" id="quizModal">
+    <div class="modal-container">
+      <button class="modal-close" onclick="hideQuizModal()">&times;</button>
+      
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="quizProgressFill"></div>
+      </div>
+
+      <!-- Step 1: Vibe Check -->
+      <div class="quiz-step active" id="quizStep1">
+        <span class="quiz-step-label">Step 1 of 4 • Somatic Diagnostic</span>
+        <h3 class="quiz-title">Where does your nervous tension settle most often?</h3>
+        
+        <div class="quiz-options">
+          <div class="quiz-option-card" onclick="selectQuizOption('vibe', 'restless', this)">
+            <span class="option-emoji">⚡</span>
+            <div class="option-text">
+              <h4>Restless hands and fidgety fingers</h4>
+              <p>Needs high tactile resistance, grinding action, and manual motor tasks.</p>
+            </div>
+          </div>
+
+          <div class="quiz-option-card" onclick="selectQuizOption('vibe', 'fog', this)">
+            <span class="option-emoji">🌫️</span>
+            <div class="option-text">
+              <h4>Mental fog & mid-day screen fatigue</h4>
+              <p>Needs bright, punchy aromatics and focused visual spiral pouring.</p>
+            </div>
+          </div>
+
+          <div class="quiz-option-card" onclick="selectQuizOption('vibe', 'social', this)">
+            <span class="option-emoji">🍷</span>
+            <div class="option-text">
+              <h4>Evening unwinding / social decompression urge</h4>
+              <p>Needs a rich, comforting, warm replacement for an alcoholic drink.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Palate Anchor -->
+      <div class="quiz-step" id="quizStep2">
+        <span class="quiz-step-label">Step 2 of 4 • Sensory Palate Mapping</span>
+        <h3 class="quiz-title">Which flavor profile feels most emotionally grounding?</h3>
+
+        <div class="quiz-options">
+          <div class="quiz-option-card" onclick="selectQuizOption('palate', 'chocolate', this)">
+            <span class="option-emoji">🍫</span>
+            <div class="option-text">
+              <h4>Dark Cacao, Molasses & Toasted Pecan</h4>
+              <p>Deep, heavy body, zero sourness, comforting classic aroma.</p>
+            </div>
+          </div>
+
+          <div class="quiz-option-card" onclick="selectQuizOption('palate', 'fruit', this)">
+            <span class="option-emoji">🫐</span>
+            <div class="option-text">
+              <h4>Wild Berry, Jasmine & Honey Peach</h4>
+              <p>Electric, juicy acidity, intoxicating aromatic bloom.</p>
+            </div>
+          </div>
+
+          <div class="quiz-option-card" onclick="selectQuizOption('palate', 'sweet', this)">
+            <span class="option-emoji">🍯</span>
+            <div class="option-text">
+              <h4>Brown Sugar, Vanilla Bean & Cream</h4>
+              <p>Silky, syrupy mouthfeel, balanced, highly comforting finish.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Vice Trigger Mapping -->
+      <div class="quiz-step" id="quizStep3">
+        <span class="quiz-step-label">Step 3 of 4 • Vice Trigger Window</span>
+        <h3 class="quiz-title">When is your craving for a smoke or drink hardest to resist?</h3>
+
+        <div class="quiz-options">
+          <div class="quiz-option-card" onclick="selectQuizOption('trigger', 'afternoon', this)">
+            <span class="option-emoji">⏳</span>
+            <div class="option-text">
+              <h4>The 3:00 PM Work Stress Window</h4>
+              <p>The habit of stepping outside or finding a distraction during high cortisol.</p>
+            </div>
+          </div>
+
+          <div class="quiz-option-card" onclick="selectQuizOption('trigger', 'evening', this)">
+            <span class="option-emoji">🌙</span>
+            <div class="option-text">
+              <h4>The 8:00 PM Post-Work "Turn-Off" Window</h4>
+              <p>Using alcohol or tobacco as a physical transition to mark the end of the day.</p>
+            </div>
+          </div>
+
+          <div class="quiz-option-card" onclick="selectQuizOption('trigger', 'morning', this)">
+            <span class="option-emoji">🌅</span>
+            <div class="option-text">
+              <h4>The First 30 Minutes of Waking Up</h4>
+              <p>Wired anxiety that needs structured, calm pacing before screens.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Archetype Reveal -->
+      <div class="quiz-step" id="quizStep4">
+        <div class="result-archetype">
+          <div class="archetype-illustration-frame">
+            <svg viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="42" fill="#24140c"/>
+              <path d="M35 35 L65 35 L58 65 L42 65 Z" fill="#ffffff"/>
+              <circle cx="50" cy="50" r="4" fill="#24140c"/>
+            </svg>
+          </div>
+          <span class="quiz-step-label">Analysis Complete • Your Extraction Archetype</span>
+          <h2 class="archetype-title" id="archetypeResultTitle">Pour-Over Paladin</h2>
+          <div class="archetype-trait" id="archetypeResultTrait">Rhythmic • Patient • Bilateral Focus</div>
+
+          <div class="archetype-box" id="archetypeResultDesc">
+            Your hands crave kinetic grounding during peak cortisol transitions. The 4-minute slow spiral pour and stepped burr resistance will channel your fidget energy directly into a rich, dopaminergic reward.
+          </div>
+
+          <div style="background:rgba(36,20,12,0.06); border:1px dashed var(--ink-espresso); padding:0.85rem; border-radius:var(--radius-sm); margin-bottom:1.5rem; font-size:0.85rem;">
+            Recommended Starter Gear: <strong id="archetypeKitRec">Tactile Starter Ritual Kit</strong>
+          </div>
+
+          <button class="btn-primary" style="width:100%; justify-content:center;" onclick="hideQuizModal(); showToast('Profile Configured!', 'Your dashboard has been synced to your archetype.', '✨');">
+            Equip This Class & Open Dashboard
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL 2: Panic Brew (Emergency Craving Intervention) -->
+  <div class="modal-overlay" id="panicModal">
+    <div class="modal-container panic-modal">
+      <button class="modal-close" onclick="hidePanicBrewModal()">&times;</button>
+      
+      <span class="section-eyebrow" style="color:var(--status-red);">Emergency Craving Protocol</span>
+      <h3 style="font-family:var(--font-serif); font-size:1.75rem; color:var(--ink-espresso); margin-bottom:0.5rem;">Cravings Peak in 3 Minutes.</h3>
+      <p style="font-size:0.9rem; color:var(--text-muted-on-cream);">
+        Follow the sensory instructions below. Breathe in as the ring expands, breathe out as it contracts. Your hands will handle the rest.
+      </p>
+
+      <div class="panic-timer-circle">
+        <span class="panic-seconds" id="panicTimerDisplay">3:00</span>
+        <span style="font-size:0.75rem; color:var(--text-muted-on-cream); text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">Mindful Pacing</span>
+      </div>
+
+      <div class="panic-step-instruction" id="panicStepInstruction">
+        Step 1: Grab your manual grinder. Feel the cool knurled aluminum in your hands.
+      </div>
+
+      <button class="btn-secondary" onclick="hidePanicBrewModal()" style="font-size:0.85rem;">
+        Craving Under Control (Exit)
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL 3: Log Cup Modal -->
+  <div class="modal-overlay" id="logCupModal">
+    <div class="modal-container">
+      <button class="modal-close" onclick="hideLogCupModal()">&times;</button>
+      
+      <h3 class="quiz-title" style="margin-bottom:0.5rem;">Log a Mindful Brew</h3>
+      <p style="font-size:0.9rem; color:var(--text-muted-on-cream); margin-bottom:1.5rem;">
+        Record your extraction to update your caffeine balance and log another vice craving intercepted.
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:1.15rem; margin-bottom:1.75rem;">
+        <div>
+          <label style="font-size:0.85rem; font-weight:800; color:var(--ink-espresso); display:block; margin-bottom:0.5rem;">Extraction Method</label>
+          <select id="logMethodSelect" style="width:100%; background:#fff; border:1px solid #d4c5b7; color:var(--ink-espresso); padding:0.85rem; border-radius:var(--radius-sm); font-size:0.92rem; font-weight:600;">
+            <option value="Pour-Over (15g Dose)" data-dose="15" data-caffeine="95">Pour-Over V60 (15g • ~95mg Caffeine)</option>
+            <option value="Aeropress Concentration (18g)" data-dose="18" data-caffeine="110">Aeropress Concentration (18g • ~110mg Caffeine)</option>
+            <option value="French Press Deep Immersion (20g)" data-dose="20" data-caffeine="125">French Press (20g • ~125mg Caffeine)</option>
+            <option value="Evening Decaf Reset (15g)" data-dose="15" data-caffeine="5">Evening Swiss-Water Decaf (15g • ~5mg Caffeine)</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="font-size:0.85rem; font-weight:800; color:var(--ink-espresso); display:block; margin-bottom:0.5rem;">Which craving did this brew replace?</label>
+          <select id="logCravingSelect" style="width:100%; background:#fff; border:1px solid #d4c5b7; color:var(--ink-espresso); padding:0.85rem; border-radius:var(--radius-sm); font-size:0.92rem; font-weight:600;">
+            <option value="3 PM Stress Cigarette">3 PM Stress Cigarette Break</option>
+            <option value="Morning Anxiety Vape">Morning Wake-up Nicotine Fixation</option>
+            <option value="8 PM Decompression Drink">Evening Alcohol / Beer Nightcap</option>
+            <option value="Fidgety / Restless Hands">Boredom / Fidgety Hand Urge</option>
+            <option value="Pure Sensory Focus">Pure Sensory Mindful Practice</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn-primary" style="width:100%; justify-content:center;" onclick="confirmLogCup()">
+        Log Extraction & Update Streak
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL 4: Smart Refill Modal -->
+  <div class="modal-overlay" id="refillModal">
+    <div class="modal-container">
+      <button class="modal-close" onclick="hideRefillModal()">&times;</button>
+      
+      <span class="section-eyebrow" style="color:var(--accent-amber);">Intake-Triggered Auto Supply</span>
+      <h3 class="quiz-title" style="margin-bottom:0.5rem;">Smart Refill Trigger Armed</h3>
+      <p style="font-size:0.9rem; color:var(--text-muted-on-cream); margin-bottom:1.5rem;">
+        You've logged 12 cups out of your 250g bag. Based on your consumption rate, your hopper will be empty in 72 hours.
+      </p>
+
+      <div style="background:rgba(36,20,12,0.05); border:1px solid rgba(36,20,12,0.12); border-radius:var(--radius-md); padding:1.35rem; margin-bottom:1.75rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+          <strong style="color:var(--ink-espresso); font-size:1.1rem; font-family:var(--font-serif);">Next Curated Origin:</strong>
+          <span style="color:var(--accent-amber); font-weight:800; font-family:var(--font-mono); font-size:1.2rem;">$18.00</span>
+        </div>
+        <div style="color:var(--ink-espresso); font-weight:700; font-size:0.95rem;">Colombia Huila — Micro-Lot Washed</div>
+        <div style="font-size:0.85rem; color:var(--text-muted-on-cream); margin-top:0.35rem;">
+          Tasting Notes: Peach Nectar, Cane Sugar, Roasted Cacao Nibs. Roasted 48 hours ago in small batches.
+        </div>
+      </div>
+
+      <div style="display:flex; gap:1rem;">
+        <button class="btn-primary" style="flex:1; justify-content:center;" onclick="confirmSmartRefill()">
+          Confirm Refill Dispatch ($18)
+        </button>
+        <button class="btn-secondary" onclick="hideRefillModal()">
+          Remind Me Later
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="brand-wrapper" style="margin-bottom:1rem;">
+          <div class="brand-logo-icon">R</div>
+          <div>
+            <span class="brand-title">THE DAILY ROAST</span>
+            <span class="brand-tagline">Mindful Habit Architecture</span>
+          </div>
+        </div>
+        <p style="line-height:1.6; font-size:0.88rem;">
+          A specialized behavioral design company positioning artisanal single-origin coffee brewing as a tactile, sensory therapy to replace nicotine, alcohol, and digital restlessness.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>The Science</h4>
+        <ul>
+          <li><a href="#science">Dopamine Replacement</a></li>
+          <li><a href="#science">Tactile Hand Fixations</a></li>
+          <li><a href="#tracker">Circadian Caps</a></li>
+          <li><a href="#tracker">Oral Replacement Therapy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Starter Hardware</h4>
+        <ul>
+          <li><a href="#kits">Pour-Over Paladin Kit</a></li>
+          <li><a href="#kits">Aeropress Kinetic Bundle</a></li>
+          <li><a href="#kits">Haptic Burr Grinder</a></li>
+          <li><a href="#kits">Swiss-Water Decaf Series</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Commitment</h4>
+        <ul>
+          <li><a href="#">30-Day Clean Habit Guarantee</a></li>
+          <li><a href="#">Ethical Farm Direct Sourcing</a></li>
+          <li><a href="#">Privacy & Health Data</a></li>
+          <li><a href="#">Community Support</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 The Daily Roast Co. All rights reserved. Illustrated in the six2eight editorial aesthetic.</div>
+      <div style="color:var(--text-muted);">Crafted for mindful humans rewiring their habits.</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    function showLogCupModal() {
+      document.getElementById("logCupModal").classList.add("active");
+    }
+    function hideLogCupModal() {
+      document.getElementById("logCupModal").classList.remove("active");
+    }
+    function confirmLogCup() {
+      const methodSelect = document.getElementById("logMethodSelect");
+      const cravingSelect = document.getElementById("logCravingSelect");
+      
+      const opt = methodSelect.options[methodSelect.selectedIndex];
+      const dose = parseInt(opt.getAttribute("data-dose") || "15", 10);
+      const caffeine = parseInt(opt.getAttribute("data-caffeine") || "95", 10);
+      const craving = cravingSelect.value;
+
+      logCup(opt.value, dose, caffeine, craving);
+      hideLogCupModal();
+    }
+  </script>
+</body>
+</html>

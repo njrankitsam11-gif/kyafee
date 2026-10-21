@@ -1,7 +1,7 @@
 /**
  * THE DAILY ROAST (TDR) - Core Application Logic
  * Behavioral Psychology, Habit Replacement & Gamification Engine
- * Inspired by the six2eight editorial illustration aesthetic
+ * Inspired by the six2eight editorial illustration & Daniel Tan's Jupiter 3D Warping Vessel
  */
 
 // --- Global State & Persistence ---
@@ -16,7 +16,7 @@ const DEFAULT_STATE = {
     beansRemainingGrams: 70, // 250g initial
     cupsBrewedFromBag: 12,
     totalBagCups: 16,
-    activeBagName: "Ethiopia Yirgacheffe (Washed)",
+    activeBagName: "IO Volcanic — Ethiopia Yirgacheffe",
   },
   dailyCaffeineMg: 210,
   maxDailyCaffeineMg: 350,
@@ -56,9 +56,328 @@ function saveState() {
 }
 
 // ==========================================================================
-// 3D ILLUSTRATED CAROUSEL CONTROLLER (Matching the reference aesthetic)
+// JUPITER MOTION EFFECT: 3D INTERACTIVE VESSEL & WARPING ENGINE
 // ==========================================================================
-let currentCardIndex = 1; // Default to card 2 (The girl walking with giant cup)
+
+const JUPITER_ORIGINS = [
+  {
+    id: "io",
+    num: "01",
+    code: "IO VOLCANIC",
+    title: "IO • Volcanic Anaerobic",
+    origin: "Ethiopia Yirgacheffe • Micro-Lot 2,150m",
+    notes: "Peach Nectar, Wild Jasmine, Meyer Lemon Zest, Golden Honey",
+    bodyDesc: "High floral aromatics engineered to stun the olfactory cortex during intense morning nicotine cravings.",
+    altitude: "2,150m",
+    process: "Anaerobic Washed",
+    caffeine: "105mg / cup",
+    dopamine: "Immediate • High Focus",
+    primaryColor: "#e6a756",
+    glowColor: "rgba(230, 167, 86, 0.32)",
+    liquidColor: "#7d421b",
+    tag1: "Habit Swap: Morning Cigarette",
+    tag2: "Notes: Peach & Jasmine",
+    tag3: "Altitude: 2,150m"
+  },
+  {
+    id: "europa",
+    num: "02",
+    code: "EUROPA GLACIAL",
+    title: "EUROPA • Glacial Cold Wash",
+    origin: "Colombia Huila • Thermal Shock 1,950m",
+    notes: "Crisp Green Apple, Raw Cacao Nibs, Cane Sugar, Silky Malic Acidity",
+    bodyDesc: "Electric, punchy acidity designed to shatter afternoon brain fog without synthetic energy drink crashes.",
+    altitude: "1,950m",
+    process: "Cold Fermentation",
+    caffeine: "95mg / cup",
+    dopamine: "Sustained • Flow State",
+    primaryColor: "#48bb78",
+    glowColor: "rgba(72, 187, 120, 0.30)",
+    liquidColor: "#57351c",
+    tag1: "Habit Swap: 3 PM Work Smoke",
+    tag2: "Notes: Green Apple & Cacao",
+    tag3: "Process: Cold Wash"
+  },
+  {
+    id: "ganymede",
+    num: "03",
+    code: "GANYMEDE OBSIDIAN",
+    title: "GANYMEDE • Obsidian Honey",
+    origin: "Guatemala Huehuetenango • High Grown 1,850m",
+    notes: "85% Dark Chocolate, Toasted Pecan, Molasses, Velvety Mouthfeel",
+    bodyDesc: "Dense, heavy mouthfeel that satisfies oral motor cravings with deep, comforting roasted caramel tones.",
+    altitude: "1,850m",
+    process: "Black Honey",
+    caffeine: "115mg / cup",
+    dopamine: "Grounding • High Body",
+    primaryColor: "#ed8936",
+    glowColor: "rgba(237, 137, 54, 0.32)",
+    liquidColor: "#3d1e11",
+    tag1: "Habit Swap: Fidgety Hands",
+    tag2: "Notes: Dark Choc & Pecan",
+    tag3: "Body: Heavy Velvet"
+  },
+  {
+    id: "callisto",
+    num: "04",
+    code: "CALLISTO DECAF",
+    title: "CALLISTO • Midnight Decaf",
+    origin: "Swiss-Water Colombia • 99.9% Caffeine-Free",
+    notes: "Roasted Hazelnut, Brown Sugar, Lavender Bud, Chamomile Finish",
+    bodyDesc: "The ultimate nightcap neutralizer. Deep comforting warmth to replace evening whiskey and beer decompression.",
+    altitude: "1,750m",
+    process: "Swiss-Water Organic",
+    caffeine: "2mg / cup",
+    dopamine: "Calming • REM Safe",
+    primaryColor: "#b794f4",
+    glowColor: "rgba(183, 148, 244, 0.30)",
+    liquidColor: "#432517",
+    tag1: "Habit Swap: 8 PM Wine / Beer",
+    tag2: "Notes: Hazelnut & Lavender",
+    tag3: "Sleep: 100% REM Safe"
+  }
+];
+
+let activeOriginIndex = 0;
+let vesselRotX = 0;
+let vesselRotY = 0;
+let targetRotX = 0;
+let targetRotY = 0;
+let dragStartX = 0;
+let isDraggingVessel = false;
+let dragCurrentRotY = 0;
+
+function initJupiterVessel() {
+  const container = document.getElementById("jupiterShowcase");
+  const vessel = document.getElementById("vesselCylinder");
+  const wrapper = document.getElementById("vessel3DWrapper");
+
+  if (!container || !vessel) return;
+
+  // Initialize Canvas Liquid
+  initLiquidCanvas();
+
+  // Mouse Parallax movement
+  container.addEventListener("mousemove", (e) => {
+    if (isDraggingVessel) return;
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    
+    // Smooth angle bounds
+    targetRotY = (x / (rect.width / 2)) * 22;
+    targetRotX = -(y / (rect.height / 2)) * 16;
+  });
+
+  container.addEventListener("mouseleave", () => {
+    if (isDraggingVessel) return;
+    targetRotX = 0;
+    targetRotY = 0;
+  });
+
+  // Drag-to-rotate physics
+  wrapper.addEventListener("mousedown", (e) => {
+    isDraggingVessel = true;
+    dragStartX = e.clientX;
+    dragCurrentRotY = targetRotY;
+    wrapper.style.cursor = "grabbing";
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (!isDraggingVessel) return;
+    const deltaX = e.clientX - dragStartX;
+    targetRotY = dragCurrentRotY + (deltaX * 0.45);
+  });
+
+  window.addEventListener("mouseup", () => {
+    if (isDraggingVessel) {
+      isDraggingVessel = false;
+      wrapper.style.cursor = "grab";
+    }
+  });
+
+  // Animation Loop for Inertia and Specular Light Sweep
+  requestAnimationFrame(vesselRenderLoop);
+}
+
+function vesselRenderLoop() {
+  // Smooth spring easing
+  vesselRotX += (targetRotX - vesselRotX) * 0.08;
+  vesselRotY += (targetRotY - vesselRotY) * 0.08;
+
+  const vessel = document.getElementById("vesselCylinder");
+  const specular = document.getElementById("vesselSpecular");
+  const label = document.getElementById("vesselLabel");
+  const tag1 = document.getElementById("orbitalTag1");
+  const tag2 = document.getElementById("orbitalTag2");
+  const tag3 = document.getElementById("orbitalTag3");
+
+  if (vessel) {
+    vessel.style.transform = `perspective(1200px) rotateY(${vesselRotY}deg) rotateX(${vesselRotX}deg)`;
+  }
+
+  // Specular light sweep shifts in opposite direction of angle
+  if (specular) {
+    const sweepOffset = -vesselRotY * 3.5;
+    specular.style.transform = `translateX(${sweepOffset}px)`;
+  }
+
+  // Cylindrical label wrap effect
+  if (label) {
+    const labelTilt = vesselRotY * 0.6;
+    label.style.transform = `rotateY(${labelTilt}deg) translateZ(4px)`;
+  }
+
+  // Floating orbital tags in multi-plane parallax depth
+  if (tag1) tag1.style.transform = `translateZ(70px) translate(${-vesselRotY * 1.2}px, ${-vesselRotX * 0.8}px)`;
+  if (tag2) tag2.style.transform = `translateZ(90px) translate(${vesselRotY * 1.4}px, ${-vesselRotX * 0.9}px)`;
+  if (tag3) tag3.style.transform = `translateZ(60px) translate(${-vesselRotY * 0.9}px, ${vesselRotX * 0.7}px)`;
+
+  // Render liquid canvas physics
+  drawLiquidWave(vesselRotY, vesselRotX);
+
+  requestAnimationFrame(vesselRenderLoop);
+}
+
+// --- Liquid Slosh Canvas Physics ---
+let waveTime = 0;
+function initLiquidCanvas() {
+  const canvas = document.getElementById("liquidCanvas");
+  if (!canvas) return;
+  canvas.width = 184 * window.devicePixelRatio || 184;
+  canvas.height = 310 * window.devicePixelRatio || 310;
+}
+
+function drawLiquidWave(rotY, rotX) {
+  const canvas = document.getElementById("liquidCanvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  const w = canvas.width;
+  const h = canvas.height;
+  waveTime += 0.035;
+
+  ctx.clearRect(0, 0, w, h);
+
+  const origin = JUPITER_ORIGINS[activeOriginIndex];
+  const color = origin ? origin.liquidColor : "#7d421b";
+
+  // Liquid height based on container fill (approx 68% full)
+  const baseY = h * 0.32;
+  const tiltSlope = (rotY / 22) * (h * 0.12);
+  const waveAmp = 6 + Math.abs(rotY) * 0.3;
+
+  ctx.beginPath();
+  ctx.moveTo(0, h);
+  ctx.lineTo(0, baseY - tiltSlope);
+
+  // Bezier slosh wave curve
+  for (let x = 0; x <= w; x += 10) {
+    const wave = Math.sin((x / w) * Math.PI * 2 + waveTime) * waveAmp;
+    const currentSlope = baseY + ((x - w / 2) / (w / 2)) * tiltSlope;
+    ctx.lineTo(x, currentSlope + wave);
+  }
+
+  ctx.lineTo(w, h);
+  ctx.closePath();
+
+  // Rich gradient
+  const grad = ctx.createLinearGradient(0, baseY, 0, h);
+  grad.addColorStop(0, color);
+  grad.addColorStop(1, "#180a04");
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Surface meniscus foam line
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = "rgba(255, 235, 210, 0.25)";
+  ctx.stroke();
+}
+
+// --- Origin Switching with 3D Warp Transition ---
+function switchJupiterOrigin(index) {
+  if (index === activeOriginIndex) return;
+  activeOriginIndex = index;
+  const origin = JUPITER_ORIGINS[index];
+  if (!origin) return;
+
+  sounds.playScaleTare();
+
+  // 3D Flip & Warp the Vessel
+  const vessel = document.getElementById("vesselCylinder");
+  if (vessel) {
+    vessel.style.transition = "transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1)";
+    targetRotY += 360; // 360 degree spin warp
+    setTimeout(() => {
+      vessel.style.transition = "transform 0.15s cubic-bezier(0.1, 0.9, 0.2, 1)";
+    }, 450);
+  }
+
+  // Update Dynamic Theme Colors (Aura & Glow)
+  document.documentElement.style.setProperty("--origin-primary", origin.primaryColor);
+  document.documentElement.style.setProperty("--origin-glow", origin.glowColor);
+
+  // Update Background Title
+  const bgTitle = document.getElementById("jupiterBgTitle");
+  if (bgTitle) {
+    bgTitle.style.opacity = "0";
+    bgTitle.style.transform = "translate(-50%, -58%) scale(0.96)";
+    setTimeout(() => {
+      bgTitle.textContent = origin.code;
+      bgTitle.style.opacity = "1";
+      bgTitle.style.transform = "translate(-50%, -58%) scale(1)";
+    }, 250);
+  }
+
+  // Update Left Information Column
+  const originName = document.getElementById("jupiterOriginName");
+  const originNotes = document.getElementById("jupiterOriginNotes");
+  const originAltitude = document.getElementById("jupiterAltitude");
+  const originProcess = document.getElementById("jupiterProcess");
+  const originCaffeine = document.getElementById("jupiterCaffeine");
+  const originDopamine = document.getElementById("jupiterDopamine");
+
+  if (originName) originName.textContent = origin.title;
+  if (originNotes) originNotes.textContent = origin.notes;
+  if (originAltitude) originAltitude.textContent = origin.altitude;
+  if (originProcess) originProcess.textContent = origin.process;
+  if (originCaffeine) originCaffeine.textContent = origin.caffeine;
+  if (originDopamine) originDopamine.textContent = origin.dopamine;
+
+  // Update Vessel Label Typography
+  const labelTitle = document.getElementById("labelOriginTitle");
+  const labelSub = document.getElementById("labelOriginSub");
+  const labelAltitude = document.getElementById("labelAltitudeVal");
+
+  if (labelTitle) labelTitle.textContent = origin.code;
+  if (labelSub) labelSub.textContent = origin.process;
+  if (labelAltitude) labelAltitude.textContent = origin.altitude;
+
+  // Update Orbital Tags
+  const tag1Text = document.getElementById("tag1Text");
+  const tag2Text = document.getElementById("tag2Text");
+  const tag3Text = document.getElementById("tag3Text");
+
+  if (tag1Text) tag1Text.textContent = origin.tag1;
+  if (tag2Text) tag2Text.textContent = origin.tag2;
+  if (tag3Text) tag3Text.textContent = origin.tag3;
+
+  // Update Selector Buttons active state
+  document.querySelectorAll(".origin-selector-btn").forEach((btn, idx) => {
+    btn.classList.toggle("active", idx === index);
+  });
+
+  // Update User Active Bag
+  appState.user.activeBagName = `${origin.title} (${origin.process})`;
+  saveState();
+  updateDashboardUI();
+
+  showToast("Origin Selected", `${origin.title} loaded into your extraction queue.`, "☕");
+}
+
+// ==========================================================================
+// 3D ILLUSTRATED CAROUSEL CONTROLLER (six2eight editorial stories)
+// ==========================================================================
+let currentCardIndex = 1;
 const TOTAL_CARDS = 4;
 
 function initCarousel() {
@@ -97,11 +416,8 @@ function updateCarouselView() {
     dot.classList.toggle("active", idx === currentCardIndex);
   });
 
-  // Calculate horizontal offset so current card is dead center
   if (track) {
-    // Card width (460) + gap (32) = 492
     const cardWidthWithGap = window.innerWidth <= 768 ? 340 : 492;
-    // We center the active card relative to index 1 (center)
     const offset = -(currentCardIndex - 1) * cardWidthWithGap;
     track.style.transform = `translateX(${offset}px)`;
   }
@@ -123,7 +439,6 @@ class SoundEngine {
     }
   }
 
-  // Tactile burr grinder crunch
   playGrinderCrunch() {
     this.init();
     const ctx = this.ctx;
@@ -167,7 +482,6 @@ class SoundEngine {
     noise.stop(now + 0.12);
   }
 
-  // Precision Digital Scale Tare Beep
   playScaleTare() {
     this.init();
     const ctx = this.ctx;
@@ -186,7 +500,6 @@ class SoundEngine {
     osc.stop(now + 0.08);
   }
 
-  // Coffee Bloom Sizzle / Pour
   playBloomSizzle() {
     this.init();
     const ctx = this.ctx;
@@ -220,7 +533,6 @@ class SoundEngine {
     noise.stop(now + duration);
   }
 
-  // Calming Zen Bell for Panic Brew
   playZenChime() {
     this.init();
     const ctx = this.ctx;
@@ -273,7 +585,6 @@ function showToast(title, message, icon = "☕") {
 function updateDashboardUI() {
   const { user, dailyCaffeineMg, maxDailyCaffeineMg } = appState;
 
-  // Profile
   const profileName = document.getElementById("profileName");
   const profileArchetype = document.getElementById("profileArchetype");
   const streakCount = document.getElementById("streakCount");
@@ -286,7 +597,6 @@ function updateDashboardUI() {
   if (cravingsCount) cravingsCount.textContent = user.cravingsDiverted;
   if (ritualMinutes) ritualMinutes.textContent = `${user.ritualMinutesEarned}m`;
 
-  // Caffeine Meter
   const caffeineCurrent = document.getElementById("caffeineCurrent");
   const gaugeFill = document.getElementById("caffeineGaugeFill");
   const meterStatusPill = document.getElementById("meterStatusPill");
@@ -309,7 +619,6 @@ function updateDashboardUI() {
     }
   }
 
-  // Bean Replenishment Status Bar
   const repBagName = document.getElementById("repBagName");
   const repCupsBrewed = document.getElementById("repCupsBrewed");
   const repProgressFill = document.getElementById("repProgressFill");
@@ -330,7 +639,6 @@ function updateDashboardUI() {
     }
   }
 
-  // Render Badges
   renderBadges();
 }
 
@@ -358,7 +666,6 @@ function renderBadges() {
   });
 }
 
-// --- Logging a Cup ---
 function logCup(method, doseGrams, caffeineEstimateMg, cravingTag) {
   sounds.playBloomSizzle();
 
@@ -403,7 +710,6 @@ function unlockBadge(badgeId) {
   }
 }
 
-// --- Just-In-Time Refill Modal Simulation ---
 function showRefillModal() {
   const modal = document.getElementById("refillModal");
   if (!modal) return;
@@ -431,9 +737,8 @@ function confirmSmartRefill() {
   updateDashboardUI();
 }
 
-// --- Panic Brew Flow (Emergency Craving Intervention) ---
 let panicInterval = null;
-let panicSecondsLeft = 180; // 3 minutes
+let panicSecondsLeft = 180;
 
 const PANIC_STEPS = [
   { at: 180, text: "Step 1: Grab your manual grinder. Feel the cool knurled aluminum in your hands." },
@@ -487,7 +792,6 @@ function updatePanicTimerUI() {
   }
 }
 
-// --- Gamified Mood & Taste Scan ---
 let currentQuizStep = 1;
 const quizAnswers = {
   vibe: null,
@@ -576,24 +880,21 @@ function calculateArchetypeResult() {
   if (resultKitRec) resultKitRec.textContent = kitRecommendation;
 }
 
-// --- Cart Simulation ---
 function addToCart(kitName, price) {
   sounds.playScaleTare();
   appState.cart.push({ kitName, price });
   showToast("Added to Ritual Order", `${kitName} ($${price}) added to bag.`, "🛍️");
 }
 
-// --- Initialize Event Listeners on DOM Load ---
 document.addEventListener("DOMContentLoaded", () => {
   updateDashboardUI();
+  initJupiterVessel();
   initCarousel();
 
-  // Soundboard Buttons
   document.getElementById("btnSoundGrind")?.addEventListener("click", () => sounds.playGrinderCrunch());
   document.getElementById("btnSoundScale")?.addEventListener("click", () => sounds.playScaleTare());
   document.getElementById("btnSoundBloom")?.addEventListener("click", () => sounds.playBloomSizzle());
 
-  // Carousel touch / swipe listener
   let touchStartX = 0;
   const track = document.getElementById("carouselTrack");
   track?.addEventListener("touchstart", (e) => {

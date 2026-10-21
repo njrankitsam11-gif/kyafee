@@ -7,12 +7,12 @@
   <meta name="description" content="Replace smoking, drinking, and nervous hand fixations with the mindful, tactile sensory craft of artisanal manual coffee brewing. Complete beginner kits, gamified mood scans, and smart intake tracking.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Ambient background glow -->
+  <!-- Ambient dynamic glow -->
   <div class="ambient-glow-top"></div>
 
   <!-- Persistent Header -->
@@ -27,11 +27,11 @@
       </a>
 
       <ul class="nav-links">
-        <li><a href="#editorial" class="nav-link">The Stories</a></li>
+        <li><a href="#vessel" class="nav-link">The Vault</a></li>
+        <li><a href="#editorial" class="nav-link">Stories</a></li>
         <li><a href="#science" class="nav-link">Habit Science</a></li>
         <li><a href="#tracker" class="nav-link">Intake Tracker</a></li>
         <li><a href="#kits" class="nav-link">Ritual Kits</a></li>
-        <li><a href="#replenish" class="nav-link">Smart Refill</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -46,6 +46,197 @@
   </header>
 
   <!-- =========================================================================
+       THE JUPITER WINE MOTION EFFECT: 3D WARPING VESSEL & CELESTIAL ORIGINS
+       ========================================================================= -->
+  <section class="jupiter-showcase-section" id="vessel">
+    <!-- Huge Luxury Background Typography (Jupiter Wine signature) -->
+    <div class="jupiter-bg-title" id="jupiterBgTitle">IO VOLCANIC</div>
+
+    <div class="jupiter-stage-container" id="jupiterShowcase">
+      
+      <!-- Left Column: Flavor & Origin Lore -->
+      <div class="jupiter-info-left">
+        <div class="jupiter-eyebrow">
+          <span style="font-size: 1rem;">✦</span> Celestial Harvest • Single Origin
+        </div>
+
+        <h1 class="jupiter-origin-name" id="jupiterOriginName">
+          IO • Volcanic Anaerobic
+        </h1>
+
+        <p class="jupiter-origin-notes" id="jupiterOriginNotes">
+          Peach Nectar, Wild Jasmine, Meyer Lemon Zest, Golden Honey. High floral aromatics engineered to stun the olfactory cortex during intense morning nicotine cravings.
+        </p>
+
+        <div class="jupiter-spec-grid">
+          <div class="spec-col">
+            <span>Altitude</span>
+            <strong id="jupiterAltitude">2,150m</strong>
+          </div>
+          <div class="spec-col">
+            <span>Process</span>
+            <strong id="jupiterProcess">Anaerobic Washed</strong>
+          </div>
+          <div class="spec-col">
+            <span>Dopamine Reward</span>
+            <strong id="jupiterDopamine">Immediate • High Focus</strong>
+          </div>
+          <div class="spec-col">
+            <span>Caffeine / Cup</span>
+            <strong id="jupiterCaffeine">105mg / cup</strong>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:1rem; margin-top:0.75rem; flex-wrap:wrap;">
+          <button class="btn-primary" onclick="addToCart('IO Volcanic Batch (250g)', 19)">
+            Order This Roast ($19)
+          </button>
+          <button class="btn-secondary" onclick="openQuizModal()">
+            Check Palate Match
+          </button>
+        </div>
+      </div>
+
+      <!-- Center Column: 3D Rotating & Warping Bottle with Fluid Liquid Wave -->
+      <div class="vessel-3d-wrapper" id="vessel3DWrapper">
+        <div class="vessel-aura-glow"></div>
+
+        <!-- Floating 3D Orbiting Tags (Multi-plane parallax) -->
+        <div class="orbital-tag tag-top-left" id="orbitalTag1">
+          <span class="tag-dot"></span>
+          <span id="tag1Text">Habit Swap: Morning Cigarette</span>
+        </div>
+
+        <div class="orbital-tag tag-mid-right" id="orbitalTag2">
+          <span class="tag-dot"></span>
+          <span id="tag2Text">Notes: Peach & Jasmine</span>
+        </div>
+
+        <div class="orbital-tag tag-bottom-left" id="orbitalTag3">
+          <span class="tag-dot"></span>
+          <span id="tag3Text">Altitude: 2,150m</span>
+        </div>
+
+        <!-- The 3D Cylinder Container -->
+        <div class="vessel-cylinder" id="vesselCylinder">
+          
+          <!-- Liquid Simulation Canvas -->
+          <canvas id="liquidCanvas" class="vessel-liquid-canvas"></canvas>
+
+          <!-- Glass Bottle Silhouette SVG Shell -->
+          <svg class="vessel-glass-shell" viewBox="0 0 220 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Wood turned bottle stopper -->
+            <rect x="94" y="10" width="32" height="26" rx="4" fill="#5c3821" stroke="#24140c" stroke-width="2"/>
+            <ellipse cx="110" cy="10" rx="16" ry="4" fill="#7a4b2c"/>
+            <line x1="94" y1="24" x2="126" y2="24" stroke="#3a2214" stroke-width="1.5"/>
+
+            <!-- Bottle Neck -->
+            <path d="M96 36 L124 36 L124 85 L96 85 Z" fill="rgba(255,255,255,0.06)" stroke="rgba(251,245,238,0.3)" stroke-width="2"/>
+            
+            <!-- Glass Shoulders & Body -->
+            <path d="M96 85 C65 110 20 125 20 160 L20 435 C20 460 35 470 110 470 C185 470 200 460 200 435 L200 160 C200 125 155 110 124 85 Z" 
+                  fill="rgba(255,255,255,0.05)" 
+                  stroke="rgba(251,245,238,0.35)" 
+                  stroke-width="2.5"/>
+
+            <!-- Thick glass base punt -->
+            <path d="M25 435 C25 455 45 464 110 464 C175 464 195 455 195 435 Z" fill="rgba(255,255,255,0.12)"/>
+            <line x1="30" y1="435" x2="190" y2="435" stroke="rgba(251,245,238,0.25)" stroke-width="1.5"/>
+          </svg>
+
+          <!-- Warping Cylinder Label -->
+          <div class="vessel-label-wrap" id="vesselLabel">
+            <div class="label-header">
+              <span>SPECIALTY RESERVE</span>
+              <span id="labelAltitudeVal">2,150M</span>
+            </div>
+
+            <div class="label-body">
+              <div class="label-sub" id="labelOriginSub">ANAEROBIC WASHED</div>
+              <h2 class="label-title" id="labelOriginTitle">IO VOLCANIC</h2>
+              <div style="font-size:0.75rem; color:var(--text-muted-on-cream); font-weight:600; margin-top:0.3rem;">
+                THE DAILY ROAST VAULT
+              </div>
+            </div>
+
+            <div class="label-footer">
+              <div>
+                <span>LOT 04/26</span><br>
+                <span>BATCH #984</span>
+              </div>
+              <div class="label-barcode">
+                <span style="height:100%;"></span>
+                <span style="height:70%;"></span>
+                <span style="height:90%;"></span>
+                <span style="height:100%;"></span>
+                <span style="height:60%;"></span>
+                <span style="height:85%;"></span>
+                <span style="height:100%;"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Specular Light Sweep Overlay -->
+          <div class="vessel-specular-sweep" id="vesselSpecular"></div>
+
+        </div>
+
+        <div class="drag-hint-pill">
+          <span>⇄</span> Move mouse or drag bottle to inspect in 3D
+        </div>
+      </div>
+
+      <!-- Right Column: Jupiter Moons Origin Selector -->
+      <div class="jupiter-origins-selector">
+        <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-muted); font-weight:700; margin-bottom:0.25rem;">
+          Select Extraction Profile
+        </div>
+
+        <!-- 01 IO -->
+        <button class="origin-selector-btn active" onclick="switchJupiterOrigin(0)">
+          <div>
+            <span class="origin-btn-num">01 / VOLCANIC</span>
+            <span class="origin-btn-title">IO Volcanic</span>
+            <span class="origin-btn-profile">Peach Nectar & Jasmine • High Focus</span>
+          </div>
+          <span style="font-size:1.25rem;">›</span>
+        </button>
+
+        <!-- 02 EUROPA -->
+        <button class="origin-selector-btn" onclick="switchJupiterOrigin(1)">
+          <div>
+            <span class="origin-btn-num">02 / GLACIAL</span>
+            <span class="origin-btn-title">Europa Glacial</span>
+            <span class="origin-btn-profile">Green Apple & Cacao • Flow State</span>
+          </div>
+          <span style="font-size:1.25rem;">›</span>
+        </button>
+
+        <!-- 03 GANYMEDE -->
+        <button class="origin-selector-btn" onclick="switchJupiterOrigin(2)">
+          <div>
+            <span class="origin-btn-num">03 / OBSIDIAN</span>
+            <span class="origin-btn-title">Ganymede Obsidian</span>
+            <span class="origin-btn-profile">Dark Choc & Pecan • Grounding Body</span>
+          </div>
+          <span style="font-size:1.25rem;">›</span>
+        </button>
+
+        <!-- 04 CALLISTO DECAF -->
+        <button class="origin-selector-btn" onclick="switchJupiterOrigin(3)">
+          <div>
+            <span class="origin-btn-num">04 / MIDNIGHT</span>
+            <span class="origin-btn-title">Callisto Decaf</span>
+            <span class="origin-btn-profile">Hazelnut & Lavender • REM Safe</span>
+          </div>
+          <span style="font-size:1.25rem;">›</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
        HERO EDITORIAL SECTION: 3D ILLUSTRATED CAROUSEL (six2eight aesthetic)
        ========================================================================= -->
   <section class="hero-editorial-section" id="editorial">
@@ -54,10 +245,10 @@
         <span>☕</span> Behavioral Psychology Meets Line-Art Editorial
       </div>
 
-      <h1 class="hero-headline">
+      <h2 class="hero-headline">
         Keep Your Hands Busy.<br>
         <span class="cream-highlight">Give Your Brain Better Rewards.</span>
-      </h1>
+      </h2>
 
       <p class="hero-subhead">
         Transform nervous tension into morning mastery. Replace cigarettes, alcohol, and digital fidgeting with the grounding tactile craft of manual coffee extraction.
@@ -83,39 +274,29 @@
           
           <div class="card-illustration-frame">
             <svg viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Chair / Stool -->
               <ellipse cx="120" cy="210" rx="36" ry="12" stroke="#24140c" stroke-width="2.5"/>
               <line x1="120" y1="210" x2="120" y2="255" stroke="#24140c" stroke-width="2.5"/>
               <line x1="105" y1="210" x2="95" y2="255" stroke="#24140c" stroke-width="2.5"/>
               <line x1="135" y1="210" x2="145" y2="255" stroke="#24140c" stroke-width="2.5"/>
 
-              <!-- Person Sitting Cross-Legged with Device -->
-              <!-- Legs in dark baggy pants -->
               <path d="M100 170 C90 190 90 205 130 205 C150 205 160 195 185 205 C195 210 205 215 210 220" stroke="#24140c" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M100 160 C120 160 135 185 155 190 C175 195 190 185 195 175" stroke="#24140c" stroke-width="20" stroke-linecap="round"/>
 
-              <!-- Sneakers -->
               <path d="M185 220 C190 220 215 220 225 228 C225 233 180 233 180 228 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
               <path d="M185 228 L215 228" stroke="#24140c" stroke-width="2"/>
               <circle cx="205" cy="224" r="2" fill="#24140c"/>
 
-              <!-- Torso & Slouch -->
               <path d="M110 145 C105 115 125 105 145 105" stroke="#24140c" stroke-width="2.5" fill="none"/>
               <path d="M135 105 C145 130 140 155 135 165" stroke="#24140c" stroke-width="2.5"/>
 
-              <!-- Head & Messy Hair -->
               <circle cx="140" cy="80" r="15" fill="#fbf5ee" stroke="#24140c" stroke-width="2.5"/>
               <path d="M130 75 C132 65 145 65 152 70 C155 75 155 82 150 86 C145 88 135 88 130 75 Z" fill="#24140c"/>
 
-              <!-- Arms Holding Tablet / Glowing Phone -->
               <path d="M125 115 C135 125 145 130 155 130" stroke="#24140c" stroke-width="2.5"/>
-              <!-- Tablet / Screen -->
               <rect x="150" y="110" width="32" height="42" rx="4" transform="rotate(15 150 110)" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
               
-              <!-- Cigarette smoke / vape wisp drifting up -->
               <path d="M195 120 C205 110 200 95 210 85 C220 75 215 60 225 50" stroke="#24140c" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3"/>
               
-              <!-- Overflowing takeout coffee cups on ground -->
               <path d="M70 245 L74 225 L88 225 L92 245 Z" fill="#ffffff" stroke="#24140c" stroke-width="2"/>
               <line x1="72" y1="225" x2="90" y2="225" stroke="#24140c" stroke-width="2"/>
               <path d="M50 248 L53 235 L63 235 L66 248 Z" fill="#ffffff" stroke="#24140c" stroke-width="1.8"/>
@@ -134,65 +315,43 @@
 
           <div class="card-illustration-frame">
             <svg viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Standing Walking Girl (from reference) -->
-              <!-- Dark Wide-Leg Pants -->
-              <!-- Left Leg -->
               <path d="M152 145 C152 165 148 200 145 225 L156 226 C160 200 165 170 166 145 Z" fill="#24140c" stroke="#24140c" stroke-width="1.5"/>
-              <!-- Right Leg (stepping forward) -->
               <path d="M165 145 C168 170 175 195 182 220 L193 218 C185 190 176 165 173 145 Z" fill="#24140c" stroke="#24140c" stroke-width="1.5"/>
 
-              <!-- Sneakers -->
-              <!-- Left foot sneaker -->
               <path d="M136 228 C140 225 152 225 158 227 C160 233 133 235 136 228 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
               <path d="M142 227 L152 227" stroke="#24140c" stroke-width="2"/>
-              <!-- Right foot sneaker -->
               <path d="M178 222 C184 218 195 218 200 221 C202 227 175 229 178 222 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
               <path d="M182 221 L194 221" stroke="#24140c" stroke-width="2"/>
 
-              <!-- Belt & Waist -->
               <rect x="150" y="140" width="24" height="6" rx="2" fill="#24140c"/>
               <rect x="159" y="141" width="6" height="4" fill="#fbf5ee"/>
 
-              <!-- White Short-Sleeve Blouse / Shirt -->
               <path d="M148 110 C140 120 142 140 152 142 C162 143 174 142 176 142 C180 130 178 120 170 110 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
-              <!-- Shirt collar -->
               <path d="M155 110 L160 118 L165 110" stroke="#24140c" stroke-width="2"/>
 
-              <!-- Tote Bag on Left Arm with Baguette -->
               <path d="M135 145 C132 155 132 170 135 182 C135 186 150 186 150 182 L147 145 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
               <path d="M138 145 C138 135 144 135 144 145" stroke="#24140c" stroke-width="2"/>
-              <!-- Baguette poking out -->
               <path d="M134 142 C130 135 132 128 137 132 C142 136 140 144 137 146" fill="#fbf5ee" stroke="#24140c" stroke-width="2"/>
               <line x1="133" y1="135" x2="136" y2="133" stroke="#24140c" stroke-width="1.5"/>
 
-              <!-- Head, Bun / Ponytail & Face Profile -->
               <path d="M158 95 C158 86 166 84 170 88 C173 92 171 100 166 102 C162 102 158 100 158 95 Z" fill="#fbf5ee" stroke="#24140c" stroke-width="2.2"/>
-              <!-- Hair & High Ponytail -->
               <path d="M158 94 C156 86 164 82 168 83 C171 85 171 92 168 95 C163 95 159 96 158 94 Z" fill="#24140c"/>
               <path d="M158 88 C150 86 148 92 154 94 C156 95 158 93 158 88 Z" fill="#24140c"/>
 
-              <!-- Right Arm Holding the GIANT COFFEE CUP -->
               <path d="M168 115 C176 122 185 125 192 125" stroke="#24140c" stroke-width="2.5"/>
 
-              <!-- THE GIANT COFFEE CUP (Centerpiece from reference!) -->
-              <!-- Cup Body -->
+              <!-- THE GIANT COFFEE CUP -->
               <path d="M188 110 L195 175 C195 178 225 178 225 175 L232 110 Z" fill="#ffffff" stroke="#24140c" stroke-width="3"/>
-              <!-- Dark Cup Sleeve -->
               <path d="M191 128 L193 155 C193 157 227 157 227 155 L229 128 Z" fill="#24140c" stroke="#24140c" stroke-width="2"/>
-              <!-- Cup Lid -->
               <ellipse cx="210" cy="110" rx="23" ry="5" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
 
-              <!-- SPLASHING COFFEE & HEART LIQUID DROPS! (Signature from photo) -->
-              <!-- Big Spurt / Splash -->
+              <!-- SPLASHING COFFEE & HEART LIQUID DROPS! -->
               <path d="M208 106 C206 95 210 85 220 80 C228 75 235 88 226 95 C222 98 214 105 210 106 Z" fill="#24140c"/>
-              <!-- Heart-shaped coffee splash top -->
               <path d="M220 82 C216 75 224 68 228 74 C232 68 240 75 236 82 C232 88 228 92 228 92 C228 92 224 88 220 82 Z" fill="#24140c"/>
-              <!-- Splashing Drops -->
               <path d="M236 95 C242 98 244 110 238 114 C235 110 233 100 236 95 Z" fill="#24140c"/>
               <ellipse cx="242" cy="120" rx="3.5" ry="5" fill="#24140c"/>
               <circle cx="230" cy="85" r="2.5" fill="#24140c"/>
 
-              <!-- Motion ground shadow lines -->
               <line x1="135" y1="236" x2="155" y2="236" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
               <line x1="180" y1="230" x2="205" y2="230" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
             </svg>
@@ -204,52 +363,33 @@
           </div>
         </div>
 
-        <!-- CARD 2: The Giant Cup Bathtub & IV Drip (Exact match to reference photo!) -->
+        <!-- CARD 2: The Giant Cup Bathtub & IV Drip -->
         <div class="illustrated-card inactive" onclick="setCarouselCard(2)">
           <div class="card-tag-pill">03 • The Coffee IV Reset</div>
 
           <div class="card-illustration-frame">
             <svg viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- GIANT COFFEE CUP BATHTUB (from right card in reference!) -->
-              <!-- Cup Body as Bathtub -->
               <path d="M125 150 C125 215 130 240 220 240 C270 240 275 215 275 150 Z" fill="#ffffff" stroke="#24140c" stroke-width="3"/>
-              <!-- Dark Sleeve Band -->
               <path d="M127 185 C127 215 135 225 220 225 C265 225 273 215 273 185 Z" fill="#24140c"/>
-              <!-- Tub Rim -->
               <ellipse cx="200" cy="150" rx="75" ry="14" fill="#ffffff" stroke="#24140c" stroke-width="3"/>
-              <!-- Coffee Liquid Level inside tub -->
               <ellipse cx="200" cy="154" rx="70" ry="10" fill="#24140c"/>
 
-              <!-- Person Relaxing in the Coffee Tub -->
-              <!-- Head leaning back on rim -->
               <circle cx="240" cy="130" r="14" fill="#fbf5ee" stroke="#24140c" stroke-width="2.2"/>
-              <!-- Hair -->
               <path d="M232 125 C232 118 242 116 248 120 C252 124 250 132 246 134 Z" fill="#24140c"/>
-              <!-- Relaxed smiling eye -->
               <path d="M242 130 C244 132 246 132 248 130" stroke="#24140c" stroke-width="1.8" stroke-linecap="round"/>
-              <!-- Shoulders & Arm resting over rim -->
               <path d="M230 144 C225 148 215 148 210 148 C205 148 200 152 205 156" stroke="#24140c" stroke-width="2.5" stroke-linecap="round"/>
 
-              <!-- THE IV DRIP STAND WITH UPSIDE DOWN COFFEE CUP! (Signature from photo) -->
-              <!-- Tall Metal Stand -->
               <line x1="85" y1="60" x2="85" y2="245" stroke="#24140c" stroke-width="2.5"/>
-              <!-- Stand Base Feet -->
               <line x1="65" y1="245" x2="105" y2="245" stroke="#24140c" stroke-width="2.5"/>
               <line x1="72" y1="240" x2="98" y2="250" stroke="#24140c" stroke-width="2"/>
-              <!-- Top Hanger Hooks -->
               <path d="M85 70 C75 70 70 80 70 88" stroke="#24140c" stroke-width="2" fill="none"/>
               <path d="M85 70 C95 70 100 80 100 88" stroke="#24140c" stroke-width="2" fill="none"/>
 
-              <!-- Inverted Coffee Cup Bag / Drip Dispenser -->
-              <!-- Hanging Wire -->
               <line x1="70" y1="88" x2="70" y2="98" stroke="#24140c" stroke-width="1.5"/>
-              <!-- Small Cup -->
               <path d="M60 100 L64 135 C64 138 86 138 86 135 L90 100 Z" fill="#ffffff" stroke="#24140c" stroke-width="2"/>
-              <!-- Dark Sleeve on small cup -->
               <rect x="62" y="112" width="26" height="14" fill="#24140c"/>
               <ellipse cx="75" cy="100" rx="15" ry="3.5" fill="#ffffff" stroke="#24140c" stroke-width="2"/>
 
-              <!-- IV Tube looping from dispenser cup into the person in bathtub! -->
               <path d="M75 138 C75 175 105 210 140 185 C165 170 190 165 220 156" stroke="#24140c" stroke-width="2" fill="none"/>
             </svg>
           </div>
@@ -266,36 +406,26 @@
 
           <div class="card-illustration-frame">
             <svg viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Character Joyfully Grinding Manual Burr Grinder -->
-              <!-- Wooden Table -->
               <line x1="40" y1="230" x2="280" y2="230" stroke="#24140c" stroke-width="3"/>
               
-              <!-- Manual Aluminum Burr Grinder -->
               <rect x="140" y="145" width="40" height="85" rx="6" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
-              <rect x="140" y="175" width="40" height="25" fill="#24140c"/> <!-- Knurled grip band -->
-              <!-- Grinder Crank Handle -->
+              <rect x="140" y="175" width="40" height="25" fill="#24140c"/>
               <line x1="160" y1="145" x2="160" y2="128" stroke="#24140c" stroke-width="3"/>
               <line x1="160" y1="128" x2="195" y2="128" stroke="#24140c" stroke-width="3"/>
               <circle cx="195" cy="128" r="7" fill="#24140c"/>
 
-              <!-- Character's Hands actively turning crank -->
-              <!-- Left hand gripping grinder body -->
               <path d="M125 180 C132 175 140 178 140 185 C140 192 132 195 125 190" stroke="#24140c" stroke-width="2.5"/>
-              <!-- Right hand on crank knob -->
               <circle cx="195" cy="124" r="9" fill="#fbf5ee" stroke="#24140c" stroke-width="2"/>
 
-              <!-- Flying Whole Coffee Beans dancing with joy -->
               <ellipse cx="115" cy="115" rx="7" ry="10" transform="rotate(-25 115 115)" fill="#24140c"/>
               <path d="M115 107 C113 115 117 115 115 123" stroke="#fbf5ee" stroke-width="1.5"/>
 
               <ellipse cx="215" cy="105" rx="6" ry="9" transform="rotate(35 215 105)" fill="#24140c"/>
               <path d="M215 98 C213 105 217 105 215 112" stroke="#fbf5ee" stroke-width="1.5"/>
 
-              <!-- Rising Aromatic Swirls (Engaging Olfactory System) -->
               <path d="M160 110 C155 90 170 80 160 65 C150 50 165 40 155 25" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
               <path d="M175 110 C185 95 175 80 185 65" stroke="#24140c" stroke-width="1.8" stroke-linecap="round"/>
 
-              <!-- Little Heart Droplets -->
               <path d="M140 50 C136 45 142 40 145 44 C148 40 154 45 150 50 C148 53 145 56 145 56 C145 56 142 53 140 50 Z" fill="#24140c"/>
             </svg>
           </div>
@@ -360,15 +490,11 @@
         
         <div class="habit-card-illustration">
           <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Ashtray / Smoke / Spilled drink -->
             <ellipse cx="100" cy="95" rx="55" ry="18" fill="#e6dacd" stroke="#24140c" stroke-width="2.5"/>
             <ellipse cx="100" cy="92" rx="42" ry="12" fill="#24140c" opacity="0.15"/>
-            <!-- Cigarette butt -->
             <rect x="75" y="80" width="30" height="7" rx="3" transform="rotate(-15 75 80)" fill="#ffffff" stroke="#24140c" stroke-width="2"/>
             <rect x="75" y="80" width="8" height="7" rx="2" transform="rotate(-15 75 80)" fill="#c53030"/>
-            <!-- Rising acrid smoke -->
             <path d="M102 75 C108 60 98 45 106 30 C114 15 108 5 116 -5" stroke="#24140c" stroke-width="2" stroke-dasharray="3 3"/>
-            <!-- Lightning jitter icon -->
             <path d="M150 40 L140 60 L152 60 L142 85" stroke="#c53030" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
@@ -405,16 +531,11 @@
 
         <div class="habit-card-illustration">
           <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Pour over cone & server -->
             <path d="M80 30 L120 30 L108 65 L92 65 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
-            <!-- Server Carafe -->
             <path d="M88 68 L112 68 L124 105 C124 108 76 108 76 105 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
-            <!-- Fresh Coffee Level -->
             <path d="M84 92 L116 92 L120 105 L80 105 Z" fill="#24140c"/>
-            <!-- Concentric Water Drops -->
             <circle cx="100" cy="45" r="4" fill="#24140c"/>
             <path d="M100 52 L100 56" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
-            <!-- Blooming steam -->
             <path d="M125 35 C132 25 130 15 136 5" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
             <circle cx="140" cy="18" r="3" fill="#24140c"/>
           </svg>
@@ -572,7 +693,7 @@
       <div class="replenishment-bar-card" id="replenish">
         <div class="rep-bar-header">
           <div>
-            <div class="rep-bar-title">Active Batch: <span id="repBagName" style="color:var(--accent-amber);">Ethiopia Yirgacheffe (Washed)</span></div>
+            <div class="rep-bar-title">Active Batch: <span id="repBagName" style="color:var(--accent-amber);">IO Volcanic — Ethiopia Yirgacheffe</span></div>
             <span style="font-size:0.78rem; color:var(--text-muted-on-cream);" id="repCupsBrewed">12 / 16 cups brewed (250g bag)</span>
           </div>
           <button class="btn-secondary" style="font-size:0.8rem; padding:0.45rem 1rem;" onclick="showRefillModal()">
@@ -663,14 +784,12 @@
         <div class="kit-badge-top">Most Popular • Pour-Over Paladin Kit</div>
         <div class="kit-illustration-wrapper">
           <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Dripper & Grinder Line Art -->
             <rect x="50" y="50" width="35" height="80" rx="4" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
             <rect x="50" y="80" width="35" height="20" fill="#24140c"/>
             <line x1="67" y1="50" x2="67" y2="35" stroke="#24140c" stroke-width="2.5"/>
             <line x1="67" y1="35" x2="95" y2="35" stroke="#24140c" stroke-width="2.5"/>
             <circle cx="95" cy="35" r="5" fill="#24140c"/>
 
-            <!-- Dripper on Server -->
             <path d="M125 45 L175 45 L160 85 L140 85 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
             <path d="M135 90 L165 90 L175 135 L125 135 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
             <path d="M130 115 L170 115 L174 135 L126 135 Z" fill="#24140c"/>
@@ -711,14 +830,11 @@
       <div class="kit-card">
         <div class="kit-illustration-wrapper">
           <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Aeropress Cylinder & Plunger -->
             <rect x="95" y="40" width="50" height="90" rx="3" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
             <rect x="105" y="15" width="30" height="40" rx="2" fill="#24140c" stroke="#24140c" stroke-width="2"/>
             <ellipse cx="120" cy="15" rx="25" ry="5" fill="#24140c"/>
             <rect x="90" y="130" width="60" height="15" rx="3" fill="#24140c"/>
-            <!-- Mug underneath -->
             <path d="M100 148 L140 148 L136 170 L104 170 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.2"/>
-            <!-- Plunge force arrows -->
             <path d="M75 35 L75 55 L70 50 M75 55 L80 50" stroke="#bd5938" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M165 35 L165 55 L160 50 M165 55 L170 50" stroke="#bd5938" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -753,16 +869,11 @@
       <div class="kit-card">
         <div class="kit-illustration-wrapper">
           <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Cozy Evening Stoneware Mug with Steam & Crescent Moon -->
             <path d="M85 75 L155 75 L145 145 C145 152 95 152 95 145 Z" fill="#ffffff" stroke="#24140c" stroke-width="2.5"/>
-            <!-- Mug Handle -->
             <path d="M150 85 C170 85 170 125 146 125" stroke="#24140c" stroke-width="2.5" fill="none"/>
-            <!-- Coffee Level -->
             <ellipse cx="120" cy="85" rx="30" ry="6" fill="#24140c"/>
-            <!-- Steam -->
             <path d="M110 65 C105 50 115 40 110 25" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
             <path d="M125 65 C130 50 120 40 125 25" stroke="#24140c" stroke-width="2" stroke-linecap="round"/>
-            <!-- Crescent Moon -->
             <path d="M175 40 C170 30 180 20 185 20 C175 22 170 32 175 40 Z" fill="#24140c"/>
           </svg>
         </div>
@@ -1079,7 +1190,7 @@
     </div>
 
     <div class="footer-bottom">
-      <div>© 2026 The Daily Roast Co. All rights reserved. Illustrated in the six2eight editorial aesthetic.</div>
+      <div>© 2026 The Daily Roast Co. All rights reserved. Designed with 3D vessel motion & editorial illustration.</div>
       <div style="color:var(--text-muted);">Crafted for mindful humans rewiring their habits.</div>
     </div>
   </footer>

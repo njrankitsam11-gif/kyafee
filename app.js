@@ -2,6 +2,7 @@
  * THE DAILY ROAST (TDR) - Core Application Logic
  * Behavioral Psychology, Habit Replacement & Gamification Engine
  * Inspired by the six2eight editorial illustration & Daniel Tan's Jupiter 3D Warping Vessel
+ * Includes the Hobbyist Atelier: Brew Lab, Cupping Journal, Passport & Soundscape
  */
 
 // --- Global State & Persistence ---
@@ -13,33 +14,38 @@ const DEFAULT_STATE = {
     streakDays: 14,
     cravingsDiverted: 42,
     ritualMinutesEarned: 210,
-    beansRemainingGrams: 70, // 250g initial
+    beansRemainingGrams: 70,
     cupsBrewedFromBag: 12,
     totalBagCups: 16,
     activeBagName: "IO Volcanic — Ethiopia Yirgacheffe",
   },
   dailyCaffeineMg: 210,
   maxDailyCaffeineMg: 350,
-  bedtimeHour: 22.5, // 10:30 PM
+  bedtimeHour: 22.5,
   caffeineHalfLifeHours: 5,
   badges: [
     { id: "grind", title: "First Fresh Grind", desc: "Engaged manual burrs", icon: "⚙️", unlocked: true },
     { id: "bloom", title: "The Golden Bloom", desc: "Witnessed CO2 expansion", icon: "✨", unlocked: true },
     { id: "streak3", title: "3-Day Clean Streak", desc: "3 vice cravings swapped", icon: "🛡️", unlocked: true },
     { id: "circadian", title: "Circadian Guardian", desc: "Cut off caffeine by 2 PM", icon: "☀️", unlocked: true },
-    { id: "sommelier", title: "Sensory Sommelier", desc: "Identified 3 flavor notes", icon: "☕", unlocked: false },
+    { id: "sommelier", title: "Sensory Sommelier", desc: "Identified 3 flavor notes", icon: "🧭", unlocked: true },
     { id: "streak14", title: "14-Day Reset Champ", desc: "Rewired 50% habit loop", icon: "🏆", unlocked: true },
-    { id: "panic_master", title: "Panic Hero", desc: "Defeated craving with Panic Brew", icon: "🧘", unlocked: false },
-    { id: "nightcap_swap", title: "Nightcap Neutralizer", desc: "Brewed decaf over evening drink", icon: "🌙", unlocked: false }
+    { id: "brew_master", title: "Concentric Virtuoso", desc: "Completed Brew Lab Extraction", icon: "⚗️", unlocked: false },
+    { id: "passport_collector", title: "Terroir Voyager", desc: "Stamped 3 single origins", icon: "🛂", unlocked: true }
   ],
-  cart: []
+  cart: [],
+  tastings: [
+    { date: "Oct 20, 2026", origin: "IO Volcanic", profile: "Floral & Peach", score: 92 },
+    { date: "Oct 18, 2026", origin: "Europa Glacial", profile: "Malic Apple & Cacao", score: 89 },
+    { date: "Oct 15, 2026", origin: "Ganymede Obsidian", profile: "Dark Chocolate & Pecan", score: 94 }
+  ]
 };
 
 let appState = loadState();
 
 function loadState() {
   try {
-    const saved = localStorage.getItem("tdr_app_state");
+    const saved = localStorage.getItem("tdr_app_state_v2");
     if (saved) return JSON.parse(saved);
   } catch (e) {
     console.error("Local storage error:", e);
@@ -49,7 +55,7 @@ function loadState() {
 
 function saveState() {
   try {
-    localStorage.setItem("tdr_app_state", JSON.stringify(appState));
+    localStorage.setItem("tdr_app_state_v2", JSON.stringify(appState));
   } catch (e) {
     console.error("Save error:", e);
   }
@@ -58,7 +64,6 @@ function saveState() {
 // ==========================================================================
 // JUPITER MOTION EFFECT: 3D INTERACTIVE VESSEL & WARPING ENGINE
 // ==========================================================================
-
 const JUPITER_ORIGINS = [
   {
     id: "io",
@@ -67,7 +72,6 @@ const JUPITER_ORIGINS = [
     title: "IO • Volcanic Anaerobic",
     origin: "Ethiopia Yirgacheffe • Micro-Lot 2,150m",
     notes: "Peach Nectar, Wild Jasmine, Meyer Lemon Zest, Golden Honey",
-    bodyDesc: "High floral aromatics engineered to stun the olfactory cortex during intense morning nicotine cravings.",
     altitude: "2,150m",
     process: "Anaerobic Washed",
     caffeine: "105mg / cup",
@@ -86,7 +90,6 @@ const JUPITER_ORIGINS = [
     title: "EUROPA • Glacial Cold Wash",
     origin: "Colombia Huila • Thermal Shock 1,950m",
     notes: "Crisp Green Apple, Raw Cacao Nibs, Cane Sugar, Silky Malic Acidity",
-    bodyDesc: "Electric, punchy acidity designed to shatter afternoon brain fog without synthetic energy drink crashes.",
     altitude: "1,950m",
     process: "Cold Fermentation",
     caffeine: "95mg / cup",
@@ -105,7 +108,6 @@ const JUPITER_ORIGINS = [
     title: "GANYMEDE • Obsidian Honey",
     origin: "Guatemala Huehuetenango • High Grown 1,850m",
     notes: "85% Dark Chocolate, Toasted Pecan, Molasses, Velvety Mouthfeel",
-    bodyDesc: "Dense, heavy mouthfeel that satisfies oral motor cravings with deep, comforting roasted caramel tones.",
     altitude: "1,850m",
     process: "Black Honey",
     caffeine: "115mg / cup",
@@ -124,7 +126,6 @@ const JUPITER_ORIGINS = [
     title: "CALLISTO • Midnight Decaf",
     origin: "Swiss-Water Colombia • 99.9% Caffeine-Free",
     notes: "Roasted Hazelnut, Brown Sugar, Lavender Bud, Chamomile Finish",
-    bodyDesc: "The ultimate nightcap neutralizer. Deep comforting warmth to replace evening whiskey and beer decompression.",
     altitude: "1,750m",
     process: "Swiss-Water Organic",
     caffeine: "2mg / cup",
@@ -154,17 +155,13 @@ function initJupiterVessel() {
 
   if (!container || !vessel) return;
 
-  // Initialize Canvas Liquid
   initLiquidCanvas();
 
-  // Mouse Parallax movement
   container.addEventListener("mousemove", (e) => {
     if (isDraggingVessel) return;
     const rect = container.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
-    
-    // Smooth angle bounds
     targetRotY = (x / (rect.width / 2)) * 22;
     targetRotX = -(y / (rect.height / 2)) * 16;
   });
@@ -175,7 +172,6 @@ function initJupiterVessel() {
     targetRotY = 0;
   });
 
-  // Drag-to-rotate physics
   wrapper.addEventListener("mousedown", (e) => {
     isDraggingVessel = true;
     dragStartX = e.clientX;
@@ -196,12 +192,10 @@ function initJupiterVessel() {
     }
   });
 
-  // Animation Loop for Inertia and Specular Light Sweep
   requestAnimationFrame(vesselRenderLoop);
 }
 
 function vesselRenderLoop() {
-  // Smooth spring easing
   vesselRotX += (targetRotX - vesselRotX) * 0.08;
   vesselRotY += (targetRotY - vesselRotY) * 0.08;
 
@@ -216,30 +210,25 @@ function vesselRenderLoop() {
     vessel.style.transform = `perspective(1200px) rotateY(${vesselRotY}deg) rotateX(${vesselRotX}deg)`;
   }
 
-  // Specular light sweep shifts in opposite direction of angle
   if (specular) {
     const sweepOffset = -vesselRotY * 3.5;
     specular.style.transform = `translateX(${sweepOffset}px)`;
   }
 
-  // Cylindrical label wrap effect
   if (label) {
     const labelTilt = vesselRotY * 0.6;
     label.style.transform = `rotateY(${labelTilt}deg) translateZ(4px)`;
   }
 
-  // Floating orbital tags in multi-plane parallax depth
   if (tag1) tag1.style.transform = `translateZ(70px) translate(${-vesselRotY * 1.2}px, ${-vesselRotX * 0.8}px)`;
   if (tag2) tag2.style.transform = `translateZ(90px) translate(${vesselRotY * 1.4}px, ${-vesselRotX * 0.9}px)`;
   if (tag3) tag3.style.transform = `translateZ(60px) translate(${-vesselRotY * 0.9}px, ${vesselRotX * 0.7}px)`;
 
-  // Render liquid canvas physics
   drawLiquidWave(vesselRotY, vesselRotX);
 
   requestAnimationFrame(vesselRenderLoop);
 }
 
-// --- Liquid Slosh Canvas Physics ---
 let waveTime = 0;
 function initLiquidCanvas() {
   const canvas = document.getElementById("liquidCanvas");
@@ -261,7 +250,6 @@ function drawLiquidWave(rotY, rotX) {
   const origin = JUPITER_ORIGINS[activeOriginIndex];
   const color = origin ? origin.liquidColor : "#7d421b";
 
-  // Liquid height based on container fill (approx 68% full)
   const baseY = h * 0.32;
   const tiltSlope = (rotY / 22) * (h * 0.12);
   const waveAmp = 6 + Math.abs(rotY) * 0.3;
@@ -270,7 +258,6 @@ function drawLiquidWave(rotY, rotX) {
   ctx.moveTo(0, h);
   ctx.lineTo(0, baseY - tiltSlope);
 
-  // Bezier slosh wave curve
   for (let x = 0; x <= w; x += 10) {
     const wave = Math.sin((x / w) * Math.PI * 2 + waveTime) * waveAmp;
     const currentSlope = baseY + ((x - w / 2) / (w / 2)) * tiltSlope;
@@ -280,20 +267,17 @@ function drawLiquidWave(rotY, rotX) {
   ctx.lineTo(w, h);
   ctx.closePath();
 
-  // Rich gradient
   const grad = ctx.createLinearGradient(0, baseY, 0, h);
   grad.addColorStop(0, color);
   grad.addColorStop(1, "#180a04");
   ctx.fillStyle = grad;
   ctx.fill();
 
-  // Surface meniscus foam line
   ctx.lineWidth = 3;
   ctx.strokeStyle = "rgba(255, 235, 210, 0.25)";
   ctx.stroke();
 }
 
-// --- Origin Switching with 3D Warp Transition ---
 function switchJupiterOrigin(index) {
   if (index === activeOriginIndex) return;
   activeOriginIndex = index;
@@ -302,21 +286,18 @@ function switchJupiterOrigin(index) {
 
   sounds.playScaleTare();
 
-  // 3D Flip & Warp the Vessel
   const vessel = document.getElementById("vesselCylinder");
   if (vessel) {
     vessel.style.transition = "transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1)";
-    targetRotY += 360; // 360 degree spin warp
+    targetRotY += 360;
     setTimeout(() => {
       vessel.style.transition = "transform 0.15s cubic-bezier(0.1, 0.9, 0.2, 1)";
     }, 450);
   }
 
-  // Update Dynamic Theme Colors (Aura & Glow)
   document.documentElement.style.setProperty("--origin-primary", origin.primaryColor);
   document.documentElement.style.setProperty("--origin-glow", origin.glowColor);
 
-  // Update Background Title
   const bgTitle = document.getElementById("jupiterBgTitle");
   if (bgTitle) {
     bgTitle.style.opacity = "0";
@@ -328,7 +309,6 @@ function switchJupiterOrigin(index) {
     }, 250);
   }
 
-  // Update Left Information Column
   const originName = document.getElementById("jupiterOriginName");
   const originNotes = document.getElementById("jupiterOriginNotes");
   const originAltitude = document.getElementById("jupiterAltitude");
@@ -343,7 +323,6 @@ function switchJupiterOrigin(index) {
   if (originCaffeine) originCaffeine.textContent = origin.caffeine;
   if (originDopamine) originDopamine.textContent = origin.dopamine;
 
-  // Update Vessel Label Typography
   const labelTitle = document.getElementById("labelOriginTitle");
   const labelSub = document.getElementById("labelOriginSub");
   const labelAltitude = document.getElementById("labelAltitudeVal");
@@ -352,7 +331,6 @@ function switchJupiterOrigin(index) {
   if (labelSub) labelSub.textContent = origin.process;
   if (labelAltitude) labelAltitude.textContent = origin.altitude;
 
-  // Update Orbital Tags
   const tag1Text = document.getElementById("tag1Text");
   const tag2Text = document.getElementById("tag2Text");
   const tag3Text = document.getElementById("tag3Text");
@@ -361,17 +339,329 @@ function switchJupiterOrigin(index) {
   if (tag2Text) tag2Text.textContent = origin.tag2;
   if (tag3Text) tag3Text.textContent = origin.tag3;
 
-  // Update Selector Buttons active state
   document.querySelectorAll(".origin-selector-btn").forEach((btn, idx) => {
     btn.classList.toggle("active", idx === index);
   });
 
-  // Update User Active Bag
   appState.user.activeBagName = `${origin.title} (${origin.process})`;
   saveState();
   updateDashboardUI();
 
   showToast("Origin Selected", `${origin.title} loaded into your extraction queue.`, "☕");
+}
+
+// ==========================================================================
+// 1. THE BREW LAB & CONCENTRIC EXTRACTION TIMER
+// ==========================================================================
+let brewLabInterval = null;
+let brewLabSeconds = 0;
+let isBrewLabRunning = false;
+const BREW_STAGES = [
+  { at: 45, name: "Stage 1: The Degassing Bloom", targetWater: 45, text: "Gently saturate all grounds. Watch carbon dioxide bubbles expand." },
+  { at: 90, name: "Stage 2: First Concentric Spiral", targetWater: 150, text: "Slow spiral outward to 150g at 4.5g/s. Engage bilateral hand balance." },
+  { at: 135, name: "Stage 3: Second Concentric Spiral", targetWater: 210, text: "Spiral inward to 210g. Keep water stream unbroken and steady." },
+  { at: 180, name: "Stage 4: Center Pour & Drawdown", targetWater: 250, text: "Final center pour to target. Let bed draw down evenly." }
+];
+
+function updateBrewLabRecipe() {
+  const doseEl = document.getElementById("sliderDose");
+  const ratioEl = document.getElementById("sliderRatio");
+  const grindEl = document.getElementById("sliderGrind");
+  const tempEl = document.getElementById("sliderTemp");
+
+  const dose = parseFloat(doseEl?.value || "15");
+  const ratio = parseFloat(ratioEl?.value || "16.5");
+  const grind = parseInt(grindEl?.value || "18", 10);
+  const temp = parseInt(tempEl?.value || "93", 10);
+
+  const totalWater = Math.round(dose * ratio);
+
+  document.getElementById("valDose").textContent = `${dose.toFixed(1)}g`;
+  document.getElementById("valRatio").textContent = `1:${ratio.toFixed(1)}`;
+  document.getElementById("valGrind").textContent = `${grind} Clicks (Med-Fine)`;
+  document.getElementById("valTemp").textContent = `${temp}°C`;
+  document.getElementById("recipeTargetWater").textContent = `${totalWater}g`;
+}
+
+function startBrewLabTimer() {
+  if (isBrewLabRunning) {
+    // Pause
+    clearInterval(brewLabInterval);
+    isBrewLabRunning = false;
+    document.getElementById("btnTimerToggle").textContent = "Resume Pour";
+    return;
+  }
+
+  isBrewLabRunning = true;
+  document.getElementById("btnTimerToggle").textContent = "Pause Pour";
+  sounds.playScaleTare();
+
+  brewLabInterval = setInterval(() => {
+    brewLabSeconds++;
+    renderBrewLabTimer();
+
+    // Check completion
+    if (brewLabSeconds >= 180) {
+      clearInterval(brewLabInterval);
+      isBrewLabRunning = false;
+      unlockBadge("brew_master");
+      sounds.playZenChime();
+      showToast("Masterpiece Extracted!", "3:00 Mindful Extraction complete. Dopamine unlocked.", "⚗️");
+      document.getElementById("btnTimerToggle").textContent = "Brew Again";
+    }
+  }, 1000);
+}
+
+function resetBrewLabTimer() {
+  clearInterval(brewLabInterval);
+  isBrewLabRunning = false;
+  brewLabSeconds = 0;
+  renderBrewLabTimer();
+  document.getElementById("btnTimerToggle").textContent = "Start Concentric Pour";
+}
+
+function renderBrewLabTimer() {
+  const mins = Math.floor(brewLabSeconds / 60);
+  const secs = brewLabSeconds % 60;
+  const digitsEl = document.getElementById("timerDigits");
+  const stageEl = document.getElementById("timerStageTitle");
+  const targetEl = document.getElementById("timerTargetWater");
+  const textEl = document.getElementById("timerStageText");
+  const ringEl = document.getElementById("timerRingProgress");
+
+  if (digitsEl) digitsEl.textContent = `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+
+  // Find stage
+  const stage = BREW_STAGES.find(s => brewLabSeconds <= s.at) || BREW_STAGES[BREW_STAGES.length - 1];
+  if (stageEl) stageEl.textContent = stage.name;
+  if (targetEl) targetEl.textContent = `Target Water: ${stage.targetWater}g`;
+  if (textEl) textEl.textContent = stage.text;
+
+  // Circular progress: circumference = 2 * PI * 110 = 691.15
+  if (ringEl) {
+    const total = 180;
+    const progress = Math.min(1, brewLabSeconds / total);
+    const offset = 691.15 * (1 - progress);
+    ringEl.style.strokeDashoffset = offset;
+  }
+
+  // Play audio cues on stage start
+  if (brewLabSeconds === 1 || brewLabSeconds === 46 || brewLabSeconds === 91 || brewLabSeconds === 136) {
+    sounds.playBloomSizzle();
+  }
+}
+
+// ==========================================================================
+// 2. THE SENSORY CUPPING WHEEL & PALATE DNA
+// ==========================================================================
+const sensoryAxes = {
+  acidity: 7.5,
+  sweetness: 8.5,
+  body: 6.0,
+  floral: 9.0,
+  finish: 8.0
+};
+
+function updateCuppingAxis(axis, value) {
+  sensoryAxes[axis] = parseFloat(value);
+  document.getElementById(`valAxis_${axis}`).textContent = value;
+  renderRadarChart();
+}
+
+function renderRadarChart() {
+  const poly = document.getElementById("radarPolygon");
+  if (!poly) return;
+
+  const center = 160;
+  const maxRadius = 120;
+  const keys = ["acidity", "sweetness", "body", "floral", "finish"];
+  const points = [];
+
+  keys.forEach((key, idx) => {
+    const angle = (Math.PI * 2 / keys.length) * idx - Math.PI / 2;
+    const val = sensoryAxes[key] / 10;
+    const r = maxRadius * val;
+    const x = center + r * Math.cos(angle);
+    const y = center + r * Math.sin(angle);
+    points.push(`${x},${y}`);
+  });
+
+  poly.setAttribute("points", points.join(" "));
+}
+
+function logCuppingEntry() {
+  sounds.playScaleTare();
+  const currentOrigin = JUPITER_ORIGINS[activeOriginIndex].title;
+  const score = Math.round(75 + (sensoryAxes.acidity + sensoryAxes.sweetness + sensoryAxes.body + sensoryAxes.floral + sensoryAxes.finish) * 0.5);
+
+  appState.tastings.unshift({
+    date: "Today",
+    origin: currentOrigin,
+    profile: `Acidity ${sensoryAxes.acidity} • Sweetness ${sensoryAxes.sweetness}`,
+    score
+  });
+
+  saveState();
+  renderTastingHistory();
+  showToast("Cupping Logged!", `Palate DNA calibrated: Score ${score} / 100`, "🧭");
+}
+
+function renderTastingHistory() {
+  const container = document.getElementById("tastingHistoryList");
+  if (!container) return;
+  container.innerHTML = "";
+
+  appState.tastings.slice(0, 4).forEach(t => {
+    const row = document.createElement("li");
+    row.className = "dna-stat-row";
+    row.innerHTML = `
+      <div>
+        <strong style="color:var(--text-primary); font-family:var(--font-serif);">${t.origin}</strong>
+        <span style="font-size:0.75rem; color:var(--text-muted); display:block;">${t.profile}</span>
+      </div>
+      <div style="text-align:right;">
+        <span style="font-family:var(--font-mono); font-weight:700; color:var(--accent-gold);">${t.score} PTS</span>
+        <span style="font-size:0.7rem; color:var(--text-muted); display:block;">${t.date}</span>
+      </div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+// ==========================================================================
+// 3. TERROIR PASSPORT & RETRO VISA STAMPS
+// ==========================================================================
+const PASSPORT_STAMPS = [
+  { id: "yirgacheffe", name: "Yirgacheffe, Ethiopia", alt: "2,150m", code: "ETH-2150", date: "STAMPED • 14 OCT 2026", locked: false, soil: "Volcanic Red Clay", coop: "Konga Cooperative" },
+  { id: "huila", name: "Huila, Colombia", alt: "1,950m", code: "COL-1950", date: "STAMPED • 17 OCT 2026", locked: false, soil: "Andes Alluvial", coop: "La Esperanza" },
+  { id: "antigua", name: "Huehuetenango, Guatemala", alt: "1,850m", code: "GTM-1850", date: "STAMPED • 21 OCT 2026", locked: false, soil: "Limestone Slopes", coop: "El Manzano" },
+  { id: "aceh", name: "Gayo Highlands, Sumatra", alt: "1,600m", code: "IDN-1600", date: "EXPEDITION LOCKED", locked: true, soil: "Equatorial Rainforest", coop: "Bener Meriah" },
+  { id: "nyeri", name: "Mount Kenya, Nyeri", alt: "2,050m", code: "KEN-2050", date: "EXPEDITION LOCKED", locked: true, soil: "Highland Loam", coop: "Karatina Reserve" }
+];
+
+function inspectPassportStamp(index) {
+  const stamp = PASSPORT_STAMPS[index];
+  if (!stamp) return;
+
+  if (stamp.locked) {
+    showToast("Terroir Expedition Locked", "Brew your current bag to unlock your next international micro-lot stamp.", "🔒");
+    return;
+  }
+
+  sounds.playScaleTare();
+  showToast(
+    `${stamp.name} Verified`,
+    `Terroir: ${stamp.soil} • Elevation: ${stamp.alt} • Sourced directly from ${stamp.coop}`,
+    "🛂"
+  );
+}
+
+// ==========================================================================
+// 4. MINDFUL SOUNDSCAPE & GUIDED BREATHWORK
+// ==========================================================================
+class SoundscapeEngine {
+  constructor() {
+    this.ctx = null;
+    this.rainGain = null;
+    this.crackleGain = null;
+    this.droneGain = null;
+    this.isPlaying = false;
+  }
+
+  init() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      this.ctx = new AudioCtx();
+
+      // Rain layer
+      this.rainGain = this.ctx.createGain();
+      this.rainGain.gain.setValueAtTime(0, this.ctx.currentTime);
+      this.rainGain.connect(this.ctx.destination);
+      this.createRainNode();
+
+      // Drone layer (528Hz calming harmonic)
+      this.droneGain = this.ctx.createGain();
+      this.droneGain.gain.setValueAtTime(0, this.ctx.currentTime);
+      this.droneGain.connect(this.ctx.destination);
+      this.createDroneNode();
+    }
+    if (this.ctx.state === "suspended") {
+      this.ctx.resume();
+    }
+  }
+
+  createRainNode() {
+    const bufferSize = this.ctx.sampleRate * 2;
+    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * 0.1;
+    }
+    const noise = this.ctx.createBufferSource();
+    noise.buffer = buffer;
+    noise.loop = true;
+
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(900, this.ctx.currentTime);
+
+    noise.connect(filter);
+    filter.connect(this.rainGain);
+    noise.start();
+  }
+
+  createDroneNode() {
+    const freqs = [132, 264, 528];
+    freqs.forEach(f => {
+      const osc = this.ctx.createOscillator();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(f, this.ctx.currentTime);
+      osc.connect(this.droneGain);
+      osc.start();
+    });
+  }
+
+  toggleMaster(buttonEl) {
+    this.init();
+    this.isPlaying = !this.isPlaying;
+    const now = this.ctx.currentTime;
+
+    if (this.isPlaying) {
+      this.rainGain.gain.linearRampToValueAtTime(0.2, now + 1.5);
+      this.droneGain.gain.linearRampToValueAtTime(0.08, now + 2);
+      buttonEl.textContent = "Pause Soundscape";
+      showToast("Soundscape Active", "432Hz ambient coffeehouse & rain initiated.", "🎧");
+    } else {
+      this.rainGain.gain.linearRampToValueAtTime(0, now + 0.8);
+      this.droneGain.gain.linearRampToValueAtTime(0, now + 0.8);
+      buttonEl.textContent = "Start Mindful Soundscape";
+    }
+  }
+
+  setLayerVolume(layer, val) {
+    if (!this.ctx) return;
+    const now = this.ctx.currentTime;
+    if (layer === "rain" && this.rainGain) {
+      this.rainGain.gain.linearRampToValueAtTime(val * 0.35, now + 0.1);
+    } else if (layer === "drone" && this.droneGain) {
+      this.droneGain.gain.linearRampToValueAtTime(val * 0.15, now + 0.1);
+    }
+  }
+}
+
+const soundscape = new SoundscapeEngine();
+
+// ==========================================================================
+// ATELIER TAB CONTROLLER
+// ==========================================================================
+function switchAtelierTab(tabId) {
+  document.querySelectorAll(".atelier-tab-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.getAttribute("data-tab") === tabId);
+  });
+  document.querySelectorAll(".atelier-panel").forEach(panel => {
+    panel.classList.toggle("active", panel.id === `panel_${tabId}`);
+  });
+  sounds.playGrinderCrunch();
 }
 
 // ==========================================================================
@@ -423,7 +713,7 @@ function updateCarouselView() {
   }
 }
 
-// --- Web Audio Synthesizer (Haptic / Acoustic Feedback) ---
+// --- Web Audio Synthesizer ---
 class SoundEngine {
   constructor() {
     this.ctx = null;
@@ -640,6 +930,7 @@ function updateDashboardUI() {
   }
 
   renderBadges();
+  renderTastingHistory();
 }
 
 function renderBadges() {
@@ -679,9 +970,6 @@ function logCup(method, doseGrams, caffeineEstimateMg, cravingTag) {
     unlockBadge("grind");
     unlockBadge("bloom");
   }
-  if (cravingTag.includes("Evening") || cravingTag.includes("Drink")) {
-    unlockBadge("nightcap_swap");
-  }
 
   saveState();
   updateDashboardUI();
@@ -691,13 +979,6 @@ function logCup(method, doseGrams, caffeineEstimateMg, cravingTag) {
     `Replaced "${cravingTag}" • +5m Tactile Ritual • Caffeine +${caffeineEstimateMg}mg`,
     "☕"
   );
-
-  const cupsLeft = appState.user.totalBagCups - appState.user.cupsBrewedFromBag;
-  if (cupsLeft <= 4) {
-    setTimeout(() => {
-      showRefillModal();
-    }, 1200);
-  }
 }
 
 function unlockBadge(badgeId) {
@@ -890,6 +1171,8 @@ document.addEventListener("DOMContentLoaded", () => {
   updateDashboardUI();
   initJupiterVessel();
   initCarousel();
+  updateBrewLabRecipe();
+  renderRadarChart();
 
   document.getElementById("btnSoundGrind")?.addEventListener("click", () => sounds.playGrinderCrunch());
   document.getElementById("btnSoundScale")?.addEventListener("click", () => sounds.playScaleTare());

@@ -7,7 +7,7 @@
   <meta name="description" content="Replace smoking, drinking, and nervous hand fixations with the mindful, tactile sensory craft of artisanal manual coffee brewing. Complete beginner kits, gamified mood scans, and smart intake tracking.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -28,6 +28,7 @@
 
       <ul class="nav-links">
         <li><a href="#vessel" class="nav-link">The Vault</a></li>
+        <li><a href="#atelier" class="nav-link">The Atelier</a></li>
         <li><a href="#editorial" class="nav-link">Stories</a></li>
         <li><a href="#science" class="nav-link">Habit Science</a></li>
         <li><a href="#tracker" class="nav-link">Intake Tracker</a></li>
@@ -49,7 +50,6 @@
        THE JUPITER WINE MOTION EFFECT: 3D WARPING VESSEL & CELESTIAL ORIGINS
        ========================================================================= -->
   <section class="jupiter-showcase-section" id="vessel">
-    <!-- Huge Luxury Background Typography (Jupiter Wine signature) -->
     <div class="jupiter-bg-title" id="jupiterBgTitle">IO VOLCANIC</div>
 
     <div class="jupiter-stage-container" id="jupiterShowcase">
@@ -91,9 +91,9 @@
           <button class="btn-primary" onclick="addToCart('IO Volcanic Batch (250g)', 19)">
             Order This Roast ($19)
           </button>
-          <button class="btn-secondary" onclick="openQuizModal()">
-            Check Palate Match
-          </button>
+          <a href="#atelier" class="btn-secondary" onclick="switchAtelierTab('brewlab')">
+            Open in Brew Lab ⚗️
+          </a>
         </div>
       </div>
 
@@ -125,21 +125,17 @@
 
           <!-- Glass Bottle Silhouette SVG Shell -->
           <svg class="vessel-glass-shell" viewBox="0 0 220 480" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Wood turned bottle stopper -->
             <rect x="94" y="10" width="32" height="26" rx="4" fill="#5c3821" stroke="#24140c" stroke-width="2"/>
             <ellipse cx="110" cy="10" rx="16" ry="4" fill="#7a4b2c"/>
             <line x1="94" y1="24" x2="126" y2="24" stroke="#3a2214" stroke-width="1.5"/>
 
-            <!-- Bottle Neck -->
             <path d="M96 36 L124 36 L124 85 L96 85 Z" fill="rgba(255,255,255,0.06)" stroke="rgba(251,245,238,0.3)" stroke-width="2"/>
             
-            <!-- Glass Shoulders & Body -->
             <path d="M96 85 C65 110 20 125 20 160 L20 435 C20 460 35 470 110 470 C185 470 200 460 200 435 L200 160 C200 125 155 110 124 85 Z" 
                   fill="rgba(255,255,255,0.05)" 
                   stroke="rgba(251,245,238,0.35)" 
                   stroke-width="2.5"/>
 
-            <!-- Thick glass base punt -->
             <path d="M25 435 C25 455 45 464 110 464 C175 464 195 455 195 435 Z" fill="rgba(255,255,255,0.12)"/>
             <line x1="30" y1="435" x2="190" y2="435" stroke="rgba(251,245,238,0.25)" stroke-width="1.5"/>
           </svg>
@@ -176,9 +172,7 @@
             </div>
           </div>
 
-          <!-- Specular Light Sweep Overlay -->
           <div class="vessel-specular-sweep" id="vesselSpecular"></div>
-
         </div>
 
         <div class="drag-hint-pill">
@@ -192,7 +186,6 @@
           Select Extraction Profile
         </div>
 
-        <!-- 01 IO -->
         <button class="origin-selector-btn active" onclick="switchJupiterOrigin(0)">
           <div>
             <span class="origin-btn-num">01 / VOLCANIC</span>
@@ -202,7 +195,6 @@
           <span style="font-size:1.25rem;">›</span>
         </button>
 
-        <!-- 02 EUROPA -->
         <button class="origin-selector-btn" onclick="switchJupiterOrigin(1)">
           <div>
             <span class="origin-btn-num">02 / GLACIAL</span>
@@ -212,7 +204,6 @@
           <span style="font-size:1.25rem;">›</span>
         </button>
 
-        <!-- 03 GANYMEDE -->
         <button class="origin-selector-btn" onclick="switchJupiterOrigin(2)">
           <div>
             <span class="origin-btn-num">03 / OBSIDIAN</span>
@@ -222,7 +213,6 @@
           <span style="font-size:1.25rem;">›</span>
         </button>
 
-        <!-- 04 CALLISTO DECAF -->
         <button class="origin-selector-btn" onclick="switchJupiterOrigin(3)">
           <div>
             <span class="origin-btn-num">04 / MIDNIGHT</span>
@@ -234,6 +224,357 @@
       </div>
 
     </div>
+  </section>
+
+  <!-- =========================================================================
+       THE HOBBYIST ATELIER (Brew Lab, Cupping Journal, Passport, Soundscape)
+       ========================================================================= -->
+  <section class="atelier-section" id="atelier">
+    <div class="section-header">
+      <span class="section-eyebrow">The Mindful Craft Station</span>
+      <h2 class="section-title">The Hobbyist Atelier</h2>
+      <p class="section-desc">
+        A true hobby absorbs your restless energy and rewards your curiosity. Master your extraction ratios, calibrate your palate, stamp your terroir passport, and tune your nervous system into mindful flow.
+      </p>
+    </div>
+
+    <!-- Atelier Tabs -->
+    <div class="atelier-nav-tabs">
+      <button class="atelier-tab-btn active" data-tab="brewlab" onclick="switchAtelierTab('brewlab')">
+        <span>⚗️</span> The Brew Lab & Timer
+      </button>
+      <button class="atelier-tab-btn" data-tab="cupping" onclick="switchAtelierTab('cupping')">
+        <span>🧭</span> Sensory Cupping Wheel
+      </button>
+      <button class="atelier-tab-btn" data-tab="passport" onclick="switchAtelierTab('passport')">
+        <span>🛂</span> Terroir Passport (3/5)
+      </button>
+      <button class="atelier-tab-btn" data-tab="soundscape" onclick="switchAtelierTab('soundscape')">
+        <span>🎧</span> Ambient Soundscape
+      </button>
+    </div>
+
+    <!-- PANEL 1: THE BREW LAB & CONCENTRIC TIMER -->
+    <div class="atelier-panel active" id="panel_brewlab">
+      <div class="brew-lab-grid">
+        
+        <!-- Recipe Sandbox Card -->
+        <div class="recipe-sandbox-card">
+          <div>
+            <span class="section-eyebrow" style="color:var(--accent-amber);">Recipe Calibration Engine</span>
+            <h3 style="font-family:var(--font-serif); font-size:1.8rem; font-weight:800; color:var(--ink-espresso); margin-bottom:1.5rem;">The Concentric Ratio Sandbox</h3>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span>Coffee Dose</span>
+                <strong id="valDose">15.0g</strong>
+              </div>
+              <input type="range" id="sliderDose" class="recipe-slider" min="12" max="24" step="0.5" value="15" oninput="updateBrewLabRecipe()">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span>Water Ratio</span>
+                <strong id="valRatio">1:16.5</strong>
+              </div>
+              <input type="range" id="sliderRatio" class="recipe-slider" min="14" max="18" step="0.5" value="16.5" oninput="updateBrewLabRecipe()">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span>Burr Grind Setting</span>
+                <strong id="valGrind">18 Clicks (Med-Fine)</strong>
+              </div>
+              <input type="range" id="sliderGrind" class="recipe-slider" min="12" max="26" step="1" value="18" oninput="updateBrewLabRecipe()">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span>Brew Water Temperature</span>
+                <strong id="valTemp">93°C</strong>
+              </div>
+              <input type="range" id="sliderTemp" class="recipe-slider" min="88" max="96" step="1" value="93" oninput="updateBrewLabRecipe()">
+            </div>
+          </div>
+
+          <div style="background:rgba(36,20,12,0.06); padding:1.25rem; border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem;">
+            <div>
+              <span style="font-size:0.75rem; color:var(--text-muted-on-cream); font-weight:700; text-transform:uppercase;">Calculated Water Yield</span>
+              <div style="font-family:var(--font-mono); font-size:1.6rem; font-weight:800; color:var(--ink-espresso);" id="recipeTargetWater">248g</div>
+            </div>
+            <button class="btn-primary" onclick="startBrewLabTimer()">
+              Sync to Concentric Timer
+            </button>
+          </div>
+        </div>
+
+        <!-- Interactive Circular Extraction Timer -->
+        <div class="timer-interactive-card">
+          <div style="width:100%; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-muted); font-weight:700;">Active Flow Assistant</span>
+            <span class="timer-target-pill" id="timerTargetWater">Target Water: 45g</span>
+          </div>
+
+          <!-- Circular SVG Ring -->
+          <div class="circular-timer-svg">
+            <svg viewBox="0 0 250 250" width="250" height="250">
+              <circle cx="125" cy="125" r="110" class="timer-ring-bg"/>
+              <circle cx="125" cy="125" r="110" class="timer-ring-progress" id="timerRingProgress" stroke-dasharray="691.15" stroke-dashoffset="691.15"/>
+            </svg>
+            <div class="timer-center-text">
+              <div class="timer-digits" id="timerDigits">0:00</div>
+              <div class="timer-stage-title" id="timerStageTitle">Stage 1: The Bloom</div>
+            </div>
+          </div>
+
+          <p style="font-size:0.9rem; color:var(--text-secondary); max-width:340px; margin-bottom:1.75rem;" id="timerStageText">
+            Gently saturate all grounds with 45g water. Watch the carbon dioxide bloom rise as volatile aromatics escape.
+          </p>
+
+          <div style="display:flex; gap:1rem; width:100%; justify-content:center;">
+            <button class="btn-primary" id="btnTimerToggle" style="flex:1; justify-content:center;" onclick="startBrewLabTimer()">
+              Start Concentric Pour
+            </button>
+            <button class="btn-secondary" onclick="resetBrewLabTimer()">
+              Reset
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PANEL 2: SENSORY CUPPING WHEEL & PALATE DNA -->
+    <div class="atelier-panel" id="panel_cupping">
+      <div class="cupping-grid">
+        
+        <!-- Interactive Radar Chart Card -->
+        <div class="cupping-wheel-card">
+          <span class="section-eyebrow" style="color:var(--accent-amber);">Sensory Calibration</span>
+          <h3 style="font-family:var(--font-serif); font-size:1.8rem; font-weight:800; color:var(--ink-espresso); margin-bottom:1rem;">Interactive Flavor Spider Chart</h3>
+          
+          <!-- SVG Radar Chart -->
+          <div class="radar-chart-container">
+            <svg viewBox="0 0 320 320" width="320" height="320">
+              <!-- Grid Circles -->
+              <circle cx="160" cy="160" r="30" fill="none" stroke="#e0d4c8" stroke-width="1"/>
+              <circle cx="160" cy="160" r="60" fill="none" stroke="#e0d4c8" stroke-width="1"/>
+              <circle cx="160" cy="160" r="90" fill="none" stroke="#e0d4c8" stroke-width="1"/>
+              <circle cx="160" cy="160" r="120" fill="none" stroke="#cbbab0" stroke-width="1.5"/>
+
+              <!-- Axis Lines -->
+              <line x1="160" y1="160" x2="160" y2="40" stroke="#cbbab0" stroke-width="1"/>
+              <line x1="160" y1="160" x2="274" y2="123" stroke="#cbbab0" stroke-width="1"/>
+              <line x1="160" y1="160" x2="230" y2="257" stroke="#cbbab0" stroke-width="1"/>
+              <line x1="160" y1="160" x2="90" y2="257" stroke="#cbbab0" stroke-width="1"/>
+              <line x1="160" y1="160" x2="46" y2="123" stroke="#cbbab0" stroke-width="1"/>
+
+              <!-- Axis Labels -->
+              <text x="160" y="28" text-anchor="middle" font-size="11" font-weight="800" fill="#24140c">ACIDITY</text>
+              <text x="286" y="125" text-anchor="start" font-size="11" font-weight="800" fill="#24140c">SWEETNESS</text>
+              <text x="240" y="275" text-anchor="middle" font-size="11" font-weight="800" fill="#24140c">BODY</text>
+              <text x="75" y="275" text-anchor="middle" font-size="11" font-weight="800" fill="#24140c">FLORAL</text>
+              <text x="32" y="125" text-anchor="end" font-size="11" font-weight="800" fill="#24140c">FINISH</text>
+
+              <!-- Dynamic Radar Shape Polygon -->
+              <polygon id="radarPolygon" points="160,70 240,135 200,220 100,230 80,130" 
+                       fill="rgba(194, 136, 81, 0.45)" 
+                       stroke="var(--accent-amber)" 
+                       stroke-width="3"/>
+            </svg>
+          </div>
+
+          <!-- Axis Sliders -->
+          <div class="sensory-axis-controls">
+            <div>
+              <label style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:800; color:var(--ink-espresso);">
+                Acidity: <strong id="valAxis_acidity">7.5</strong>
+              </label>
+              <input type="range" class="recipe-slider" min="1" max="10" step="0.5" value="7.5" oninput="updateCuppingAxis('acidity', this.value)">
+            </div>
+            <div>
+              <label style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:800; color:var(--ink-espresso);">
+                Sweetness: <strong id="valAxis_sweetness">8.5</strong>
+              </label>
+              <input type="range" class="recipe-slider" min="1" max="10" step="0.5" value="8.5" oninput="updateCuppingAxis('sweetness', this.value)">
+            </div>
+            <div>
+              <label style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:800; color:var(--ink-espresso);">
+                Body: <strong id="valAxis_body">6.0</strong>
+              </label>
+              <input type="range" class="recipe-slider" min="1" max="10" step="0.5" value="6.0" oninput="updateCuppingAxis('body', this.value)">
+            </div>
+            <div>
+              <label style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:800; color:var(--ink-espresso);">
+                Floral Aromatics: <strong id="valAxis_floral">9.0</strong>
+              </label>
+              <input type="range" class="recipe-slider" min="1" max="10" step="0.5" value="9.0" oninput="updateCuppingAxis('floral', this.value)">
+            </div>
+            <div>
+              <label style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:800; color:var(--ink-espresso);">
+                Finish / Aftertaste: <strong id="valAxis_finish">8.0</strong>
+              </label>
+              <input type="range" class="recipe-slider" min="1" max="10" step="0.5" value="8.0" oninput="updateCuppingAxis('finish', this.value)">
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem; text-align:center;">
+            <button class="btn-primary" style="width:100%; justify-content:center;" onclick="logCuppingEntry()">
+              Log Tasting to Palate DNA (+10 PTS)
+            </button>
+          </div>
+        </div>
+
+        <!-- Palate DNA Profile Card -->
+        <div class="palate-dna-card">
+          <div>
+            <div class="dna-badge-pill">
+              <span>🧬</span> Sensory Archetype: Floral Alchemist
+            </div>
+            <h3 style="font-family:var(--font-serif); font-size:1.75rem; font-weight:800; margin-bottom:0.75rem;">Your Palate DNA Profile</h3>
+            <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.55;">
+              As your tastebuds regenerate post-nicotine, your sensory threshold has shifted toward delicate peach aldehydes and crisp malic acidities.
+            </p>
+
+            <ul class="dna-stats-list" id="tastingHistoryList">
+              <!-- Rendered dynamically -->
+            </ul>
+          </div>
+
+          <div style="background:rgba(251,245,238,0.06); padding:1rem; border-radius:var(--radius-sm); font-size:0.8rem; color:var(--text-secondary);">
+            💡 <strong>Hobbyist Tip:</strong> Slurp sharply from your spoon to aerate the coffee across all 10,000 palate taste buds simultaneously.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PANEL 3: TERROIR PASSPORT & RETRO VISA STAMPS -->
+    <div class="atelier-panel" id="panel_passport">
+      <div class="passport-leather-book">
+        
+        <div class="passport-gold-emblem">
+          <div style="font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.2em; color:var(--accent-gold); font-weight:700;">INTERNATIONAL TERROIR REGISTRY</div>
+          <h3 style="font-family:var(--font-serif); font-size:2.2rem; font-weight:900; color:var(--bg-card-cream); margin:0.35rem 0;">Passport to Terroir</h3>
+          <p style="font-size:0.92rem; color:var(--text-muted);">Each micro-lot roast you brew unlocks an authentic origin visa stamp and uncovers farm soil lore.</p>
+        </div>
+
+        <div class="passport-stamps-grid">
+          
+          <!-- Stamp 1: Ethiopia (Unlocked) -->
+          <div class="visa-stamp-card" onclick="inspectPassportStamp(0)">
+            <div class="stamp-ink-seal" style="border-color:#bd5938; color:#bd5938;">
+              <span style="font-size:0.6rem;">ETHIOPIA</span>
+              <span style="font-size:1.15rem; font-weight:900;">2,150M</span>
+              <span style="font-size:0.55rem;">YIRGACHEFFE</span>
+            </div>
+            <h4 style="font-family:var(--font-serif); font-size:1.1rem; font-weight:800;">IO Volcanic Micro-Lot</h4>
+            <span style="font-size:0.75rem; color:var(--text-muted-on-cream); display:block; margin-top:0.25rem;">STAMPED • 14 OCT 2026</span>
+          </div>
+
+          <!-- Stamp 2: Colombia (Unlocked) -->
+          <div class="visa-stamp-card" onclick="inspectPassportStamp(1)">
+            <div class="stamp-ink-seal" style="border-color:#2b6cb0; color:#2b6cb0; transform:rotate(6deg);">
+              <span style="font-size:0.6rem;">COLOMBIA</span>
+              <span style="font-size:1.15rem; font-weight:900;">1,950M</span>
+              <span style="font-size:0.55rem;">HUILA ANDES</span>
+            </div>
+            <h4 style="font-family:var(--font-serif); font-size:1.1rem; font-weight:800;">Europa Glacial Wash</h4>
+            <span style="font-size:0.75rem; color:var(--text-muted-on-cream); display:block; margin-top:0.25rem;">STAMPED • 17 OCT 2026</span>
+          </div>
+
+          <!-- Stamp 3: Guatemala (Unlocked) -->
+          <div class="visa-stamp-card" onclick="inspectPassportStamp(2)">
+            <div class="stamp-ink-seal" style="border-color:#c05621; color:#c05621; transform:rotate(-4deg);">
+              <span style="font-size:0.6rem;">GUATEMALA</span>
+              <span style="font-size:1.15rem; font-weight:900;">1,850M</span>
+              <span style="font-size:0.55rem;">HUEHUETENANGO</span>
+            </div>
+            <h4 style="font-family:var(--font-serif); font-size:1.1rem; font-weight:800;">Ganymede Obsidian</h4>
+            <span style="font-size:0.75rem; color:var(--text-muted-on-cream); display:block; margin-top:0.25rem;">STAMPED • 21 OCT 2026</span>
+          </div>
+
+          <!-- Stamp 4: Sumatra (Locked) -->
+          <div class="visa-stamp-card locked" onclick="inspectPassportStamp(3)">
+            <div class="stamp-ink-seal" style="border-color:#718096; color:#718096; border-style:dashed;">
+              <span style="font-size:0.6rem;">SUMATRA</span>
+              <span style="font-size:1.15rem; font-weight:900;">1,600M</span>
+              <span style="font-size:0.55rem;">LOCKED</span>
+            </div>
+            <h4 style="font-family:var(--font-serif); font-size:1.1rem; font-weight:800;">Gayo Rainforest Reserve</h4>
+            <span style="font-size:0.75rem; color:var(--text-muted-on-cream); display:block; margin-top:0.25rem;">EXPEDITION 04 LOCKED</span>
+          </div>
+
+          <!-- Stamp 5: Kenya (Locked) -->
+          <div class="visa-stamp-card locked" onclick="inspectPassportStamp(4)">
+            <div class="stamp-ink-seal" style="border-color:#718096; color:#718096; border-style:dashed;">
+              <span style="font-size:0.6rem;">KENYA</span>
+              <span style="font-size:1.15rem; font-weight:900;">2,050M</span>
+              <span style="font-size:0.55rem;">LOCKED</span>
+            </div>
+            <h4 style="font-family:var(--font-serif); font-size:1.1rem; font-weight:800;">Nyeri Volcanic SL-28</h4>
+            <span style="font-size:0.75rem; color:var(--text-muted-on-cream); display:block; margin-top:0.25rem;">EXPEDITION 05 LOCKED</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 4: MINDFUL SOUNDSCAPE & GUIDED BREATHWORK -->
+    <div class="atelier-panel" id="panel_soundscape">
+      <div class="soundscape-mixer-grid">
+        
+        <!-- Mixer Card -->
+        <div class="mixer-card">
+          <span class="section-eyebrow" style="color:var(--accent-gold);">Acoustic Mindfulness Engine</span>
+          <h3 style="font-family:var(--font-serif); font-size:1.8rem; font-weight:800; margin-bottom:1.5rem;">Coffeehouse Sound Generator</h3>
+
+          <!-- Channel 1: Rain -->
+          <div class="sound-channel-row">
+            <div class="channel-label">
+              <span>🌧️</span> Rain on Window Glass
+            </div>
+            <input type="range" class="recipe-slider" min="0" max="1" step="0.05" value="0.6" oninput="soundscape.setLayerVolume('rain', this.value)">
+            <span style="font-family:var(--font-mono); font-size:0.8rem; text-align:right;">60%</span>
+          </div>
+
+          <!-- Channel 2: 528Hz Drone -->
+          <div class="sound-channel-row">
+            <div class="channel-label">
+              <span>🧘</span> 528Hz Meditation Drone
+            </div>
+            <input type="range" class="recipe-slider" min="0" max="1" step="0.05" value="0.4" oninput="soundscape.setLayerVolume('drone', this.value)">
+            <span style="font-family:var(--font-mono); font-size:0.8rem; text-align:right;">40%</span>
+          </div>
+
+          <div style="margin-top:2rem;">
+            <button class="btn-primary" style="width:100%; justify-content:center;" onclick="soundscape.toggleMaster(this)">
+              Start Mindful Soundscape
+            </button>
+          </div>
+        </div>
+
+        <!-- 4-7-8 Harmonic Breathwork Guide -->
+        <div class="breathwork-circle-card">
+          <span class="section-eyebrow" style="color:var(--accent-amber);">Craving Interception Pacing</span>
+          <h3 style="font-family:var(--font-serif); font-size:1.6rem; font-weight:800; color:var(--ink-espresso);">Harmonic Breathwork Circle</h3>
+          
+          <div class="breath-circle">
+            <span style="font-size:2rem;">🌬️</span>
+          </div>
+
+          <div class="breath-guide-text">
+            Breathe In (4s) • Hold (7s) • Release (8s)
+          </div>
+
+          <p style="font-size:0.85rem; color:var(--text-muted-on-cream); margin-top:1rem;">
+            Synchronized with pour-over drawdown. Lowers heart rate and dissipates sudden nicotine and stress cravings in 90 seconds.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
   </section>
 
   <!-- =========================================================================
@@ -714,7 +1055,7 @@
       <div class="badges-container">
         <div class="badges-header">
           <span>Beginner Milestone Badges</span>
-          <span style="font-size:0.85rem; color:var(--accent-gold); font-weight:700;">5 / 8 Unlocked</span>
+          <span style="font-size:0.85rem; color:var(--accent-gold); font-weight:700;">6 / 8 Unlocked</span>
         </div>
         <div class="badge-grid" id="badgeGrid">
           <!-- Populated dynamically by app.js -->
@@ -1159,12 +1500,12 @@
       </div>
 
       <div class="footer-col">
-        <h4>The Science</h4>
+        <h4>The Atelier</h4>
         <ul>
-          <li><a href="#science">Dopamine Replacement</a></li>
-          <li><a href="#science">Tactile Hand Fixations</a></li>
-          <li><a href="#tracker">Circadian Caps</a></li>
-          <li><a href="#tracker">Oral Replacement Therapy</a></li>
+          <li><a href="#atelier" onclick="switchAtelierTab('brewlab')">The Brew Lab</a></li>
+          <li><a href="#atelier" onclick="switchAtelierTab('cupping')">Sensory Cupping Wheel</a></li>
+          <li><a href="#atelier" onclick="switchAtelierTab('passport')">Terroir Passport</a></li>
+          <li><a href="#atelier" onclick="switchAtelierTab('soundscape')">Ambient Soundscape</a></li>
         </ul>
       </div>
 
@@ -1190,7 +1531,7 @@
     </div>
 
     <div class="footer-bottom">
-      <div>© 2026 The Daily Roast Co. All rights reserved. Designed with 3D vessel motion & editorial illustration.</div>
+      <div>© 2026 The Daily Roast Co. All rights reserved. Designed with 3D vessel motion & the Hobbyist Atelier.</div>
       <div style="color:var(--text-muted);">Crafted for mindful humans rewiring their habits.</div>
     </div>
   </footer>

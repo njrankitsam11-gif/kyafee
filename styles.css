@@ -345,6 +345,76 @@ body {
   color: var(--text-primary);
 }
 
+/* Live Coffee Freshness & Dates Card */
+.coffee-dates-badge-card {
+  background: rgba(30, 18, 12, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(230, 167, 86, 0.3);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.1rem;
+  margin: 1.15rem 0 0.85rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.4s ease;
+}
+
+.dates-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid rgba(251, 245, 238, 0.08);
+}
+
+.dates-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #48bb78;
+  box-shadow: 0 0 10px #48bb78;
+  animation: pulseFresh 2s infinite ease-in-out;
+}
+
+@keyframes pulseFresh {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.dates-card-status {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 0.03em;
+}
+
+.dates-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem 1.2rem;
+  margin-top: 0.6rem;
+}
+
+.date-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.date-lbl {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+}
+
+.date-val {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
 /* 3D Vessel Body */
 .vessel-3d-wrapper {
   position: relative;
@@ -358,6 +428,49 @@ body {
 
 .vessel-3d-wrapper:active {
   cursor: grabbing;
+}
+
+/* Vessel Style Toggle (Pour-Over Carafe vs Bean Jar) */
+.vessel-style-toggle-bar {
+  position: absolute;
+  top: 15px;
+  z-index: 10;
+  display: inline-flex;
+  gap: 0.35rem;
+  background: rgba(22, 13, 8, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(251, 245, 238, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.vessel-toggle-pill {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.vessel-toggle-pill:hover {
+  color: var(--bg-card-cream);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.vessel-toggle-pill.active {
+  background: var(--bg-card-cream);
+  color: var(--ink-espresso);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .vessel-aura-glow {
@@ -374,7 +487,7 @@ body {
 
 .vessel-cylinder {
   position: relative;
-  width: 220px;
+  width: 240px;
   height: 480px;
   transform-style: preserve-3d;
   transition: transform 0.15s cubic-bezier(0.1, 0.9, 0.2, 1);
@@ -393,26 +506,36 @@ body {
 
 .vessel-liquid-canvas {
   position: absolute;
-  top: 135px;
-  left: 18px;
-  width: 184px;
+  top: 145px;
+  left: 20px;
+  width: 200px;
   height: 310px;
-  border-radius: 12px 12px 28px 28px;
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
+  transition: clip-path 0.4s ease;
+}
+
+/* Conical clip-path matching pour-over carafe */
+.vessel-mode-carafe .vessel-liquid-canvas {
+  clip-path: polygon(24% 0%, 76% 0%, 98% 94%, 90% 100%, 10% 100%, 2% 94%);
+}
+
+/* Rectangular rounded clip-path matching apothecary jar */
+.vessel-mode-jar .vessel-liquid-canvas {
+  clip-path: polygon(8% 0%, 92% 0%, 92% 96%, 84% 100%, 16% 100%, 8% 96%);
 }
 
 .vessel-label-wrap {
   position: absolute;
-  top: 175px;
-  left: 20px;
-  right: 20px;
-  height: 230px;
+  top: 180px;
+  left: 28px;
+  right: 28px;
+  height: 236px;
   background: var(--bg-card-cream);
   border-radius: 8px;
   box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.15), 0 8px 25px rgba(0, 0, 0, 0.4);
-  padding: 1.25rem 1rem;
+  padding: 0.9rem 0.85rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -422,38 +545,93 @@ body {
   transition: transform 0.25s ease, background 0.4s ease;
 }
 
-.label-header {
+.label-badge-strip {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   border-bottom: 1.5px solid var(--ink-espresso);
-  padding-bottom: 0.4rem;
+  padding-bottom: 0.35rem;
+}
+
+.label-grade-badge {
+  font-weight: 900;
+}
+
+.label-score-badge {
+  background: var(--ink-espresso);
+  color: var(--bg-card-cream);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+}
+
+.label-alt-badge {
+  font-family: var(--font-mono);
+  font-weight: 700;
 }
 
 .label-body {
   text-align: center;
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
 }
 
 .label-title {
   font-family: var(--font-serif);
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: -0.01em;
   line-height: 1.1;
-  margin-bottom: 0.2rem;
+  margin: 0.15rem 0;
 }
 
 .label-sub {
-  font-size: 0.72rem;
-  font-weight: 700;
+  font-size: 0.68rem;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent-amber);
+}
+
+.label-terroir-tag {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted-on-cream);
+}
+
+.label-dates-block {
+  background: rgba(36, 20, 12, 0.06);
+  border: 1px solid rgba(36, 20, 12, 0.12);
+  border-radius: 4px;
+  padding: 0.35rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 0.2rem 0;
+}
+
+.label-date-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.6rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.label-date-row .lbl-k {
+  color: var(--text-muted-on-cream);
+  font-weight: 800;
+}
+
+.label-date-row .lbl-v {
+  color: var(--ink-espresso);
 }
 
 .label-footer {
@@ -461,10 +639,22 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   border-top: 1px dashed rgba(36, 20, 12, 0.3);
-  padding-top: 0.4rem;
+  padding-top: 0.35rem;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 700;
+}
+
+.label-meta-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nitro-tag {
+  color: #2b7a4b;
+  font-size: 0.58rem;
+  font-weight: 800;
 }
 
 .label-barcode {
@@ -495,6 +685,83 @@ body {
   z-index: 5;
   transition: transform 0.1s ease;
   mix-blend-mode: overlay;
+}
+
+/* Accompanying Artisan Ceramic Coffee Cup with Animated Rising Steam */
+.artisan-cup-companion {
+  position: absolute;
+  bottom: 8px;
+  right: -52px;
+  width: 150px;
+  height: 110px;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 18px 25px rgba(0, 0, 0, 0.65));
+  pointer-events: none;
+  z-index: 4;
+  transition: transform 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+.artisan-cup-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Steam Wisps Animation */
+.steam-container {
+  position: absolute;
+  top: 0;
+  left: 45px;
+  width: 50px;
+  height: 55px;
+  pointer-events: none;
+}
+
+.steam-wisp {
+  position: absolute;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(to top, rgba(255, 235, 215, 0.75), rgba(255, 255, 255, 0.05));
+  filter: blur(2px);
+}
+
+.steam-wisp.wisp-1 {
+  left: 12px;
+  height: 28px;
+  animation: steamRise1 3.2s infinite ease-in-out;
+}
+
+.steam-wisp.wisp-2 {
+  left: 24px;
+  height: 36px;
+  animation: steamRise2 3.8s infinite 0.7s ease-in-out;
+}
+
+.steam-wisp.wisp-3 {
+  left: 36px;
+  height: 26px;
+  animation: steamRise3 3.4s infinite 1.4s ease-in-out;
+}
+
+@keyframes steamRise1 {
+  0% { transform: translateY(15px) translateX(0) scaleX(1); opacity: 0; }
+  25% { opacity: 0.7; }
+  60% { transform: translateY(-16px) translateX(6px) scaleX(1.3); opacity: 0.45; }
+  100% { transform: translateY(-38px) translateX(-4px) scaleX(1.6); opacity: 0; }
+}
+
+@keyframes steamRise2 {
+  0% { transform: translateY(15px) translateX(0) scaleX(1); opacity: 0; }
+  30% { opacity: 0.65; }
+  65% { transform: translateY(-20px) translateX(-6px) scaleX(1.2); opacity: 0.4; }
+  100% { transform: translateY(-44px) translateX(5px) scaleX(1.8); opacity: 0; }
+}
+
+@keyframes steamRise3 {
+  0% { transform: translateY(15px) translateX(0) scaleX(1); opacity: 0; }
+  35% { opacity: 0.75; }
+  70% { transform: translateY(-18px) translateX(5px) scaleX(1.4); opacity: 0.4; }
+  100% { transform: translateY(-40px) translateX(-5px) scaleX(1.5); opacity: 0; }
 }
 
 .orbital-tag {
@@ -552,7 +819,7 @@ body {
   background: rgba(30, 18, 12, 0.5);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 1rem 1.25rem;
+  padding: 0.9rem 1.15rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -576,27 +843,79 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
+.origin-btn-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.origin-btn-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
 .origin-btn-num {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   font-weight: 700;
-  opacity: 0.6;
+  opacity: 0.7;
+}
+
+.origin-date-badge {
+  font-size: 0.64rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  background: rgba(230, 167, 86, 0.15);
+  color: var(--accent-gold);
+  border: 1px solid rgba(230, 167, 86, 0.3);
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+}
+
+.origin-selector-btn.active .origin-date-badge {
+  background: var(--ink-espresso);
+  color: var(--bg-card-cream);
+  border-color: var(--ink-espresso);
 }
 
 .origin-btn-title {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 800;
   display: block;
 }
 
 .origin-btn-profile {
-  font-size: 0.75rem;
-  opacity: 0.8;
+  font-size: 0.74rem;
+  opacity: 0.85;
+}
+
+.origin-btn-meta {
+  display: block;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  opacity: 0.75;
+  margin-top: 0.1rem;
+}
+
+.origin-arrow {
+  font-size: 1.35rem;
+  opacity: 0.6;
+  transition: transform 0.2s ease;
+  padding-left: 0.5rem;
+}
+
+.origin-selector-btn:hover .origin-arrow {
+  transform: translateX(3px);
+  opacity: 1;
 }
 
 .origin-selector-btn.active .origin-btn-num,
-.origin-selector-btn.active .origin-btn-profile {
+.origin-selector-btn.active .origin-btn-profile,
+.origin-selector-btn.active .origin-btn-meta {
   color: var(--text-muted-on-cream);
 }
 

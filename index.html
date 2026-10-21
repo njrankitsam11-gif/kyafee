@@ -68,6 +68,32 @@
           Peach Nectar, Wild Jasmine, Meyer Lemon Zest, Golden Honey. High floral aromatics engineered to stun the olfactory cortex during intense morning nicotine cravings.
         </p>
 
+        <!-- Live Coffee Freshness & Dates Card -->
+        <div class="coffee-dates-badge-card" id="coffeeDatesCard">
+          <div class="dates-card-header">
+            <span class="dates-pulse-dot"></span>
+            <span class="dates-card-status" id="datesFreshnessStatus">🔥 Roasted 2 Days Ago • Peak Flavor Window Active</span>
+          </div>
+          <div class="dates-grid">
+            <div class="date-item">
+              <span class="date-lbl">ROAST DATE</span>
+              <strong class="date-val" id="jupiterRoastDate">Oct 19, 2026</strong>
+            </div>
+            <div class="date-item">
+              <span class="date-lbl">PEAK WINDOW</span>
+              <strong class="date-val" id="jupiterPeakWindow">Days 5 — 21</strong>
+            </div>
+            <div class="date-item">
+              <span class="date-lbl">HARVEST CROP</span>
+              <strong class="date-val" id="jupiterHarvestDate">Nov '25 – Jan '26</strong>
+            </div>
+            <div class="date-item">
+              <span class="date-lbl">DEGAS REST</span>
+              <strong class="date-val" id="jupiterDegasStatus">Optimal Bloom (94%)</strong>
+            </div>
+          </div>
+        </div>
+
         <div class="jupiter-spec-grid">
           <div class="spec-col">
             <span>Altitude</span>
@@ -97,9 +123,19 @@
         </div>
       </div>
 
-      <!-- Center Column: 3D Rotating & Warping Bottle with Fluid Liquid Wave -->
+      <!-- Center Column: 3D Specialty Coffee Carafe / Jar & Steaming Ceramic Cup -->
       <div class="vessel-3d-wrapper" id="vessel3DWrapper">
         <div class="vessel-aura-glow"></div>
+
+        <!-- Vessel Style Toggle (Pour-Over Carafe vs Specialty Bean Jar) -->
+        <div class="vessel-style-toggle-bar">
+          <button class="vessel-toggle-pill active" id="btnToggleCarafe" onclick="setVesselMode('carafe')">
+            <span>⚗️</span> Pour-Over Carafe & Cup
+          </button>
+          <button class="vessel-toggle-pill" id="btnToggleJar" onclick="setVesselMode('jar')">
+            <span>🫙</span> Specialty Bean Jar & Cup
+          </button>
+        </div>
 
         <!-- Floating 3D Orbiting Tags (Multi-plane parallax) -->
         <div class="orbital-tag tag-top-left" id="orbitalTag1">
@@ -114,51 +150,141 @@
 
         <div class="orbital-tag tag-bottom-left" id="orbitalTag3">
           <span class="tag-dot"></span>
-          <span id="tag3Text">Altitude: 2,150m</span>
+          <span id="tag3Text">🔥 Roasted 2 Days Ago</span>
         </div>
 
-        <!-- The 3D Cylinder Container -->
-        <div class="vessel-cylinder" id="vesselCylinder">
+        <!-- The 3D Vessel Container -->
+        <div class="vessel-cylinder vessel-mode-carafe" id="vesselCylinder">
           
-          <!-- Liquid Simulation Canvas -->
+          <!-- Liquid Simulation Canvas for Brewed Coffee -->
           <canvas id="liquidCanvas" class="vessel-liquid-canvas"></canvas>
 
-          <!-- Glass Bottle Silhouette SVG Shell -->
-          <svg class="vessel-glass-shell" viewBox="0 0 220 480" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="94" y="10" width="32" height="26" rx="4" fill="#5c3821" stroke="#24140c" stroke-width="2"/>
-            <ellipse cx="110" cy="10" rx="16" ry="4" fill="#7a4b2c"/>
-            <line x1="94" y1="24" x2="126" y2="24" stroke="#3a2214" stroke-width="1.5"/>
+          <!-- 1. Specialty Glass Pour-Over Carafe SVG Shell -->
+          <svg class="vessel-glass-shell carafe-shell" id="carafeShellSvg" viewBox="0 0 240 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="carafeGlassGrad" x1="0" y1="0" x2="240" y2="480" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.22)"/>
+                <stop offset="35%" stop-color="rgba(255,255,255,0.05)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0.15)"/>
+              </linearGradient>
+              <linearGradient id="woodCollarGrad" x1="86" y1="115" x2="154" y2="145" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#ba825a"/>
+                <stop offset="50%" stop-color="#845332"/>
+                <stop offset="100%" stop-color="#54301a"/>
+              </linearGradient>
+            </defs>
 
-            <path d="M96 36 L124 36 L124 85 L96 85 Z" fill="rgba(255,255,255,0.06)" stroke="rgba(251,245,238,0.3)" stroke-width="2"/>
-            
-            <path d="M96 85 C65 110 20 125 20 160 L20 435 C20 460 35 470 110 470 C185 470 200 460 200 435 L200 160 C200 125 155 110 124 85 Z" 
-                  fill="rgba(255,255,255,0.05)" 
-                  stroke="rgba(251,245,238,0.35)" 
+            <!-- Glass Pouring Lip with angled drip spout on the left -->
+            <path d="M48 32 C46 25, 68 20, 120 20 C172 20, 192 25, 192 32 C192 38, 168 43, 120 43 C72 43, 50 38, 48 32 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(251,245,238,0.4)" stroke-width="2"/>
+            <path d="M48 32 C36 29, 34 23, 44 20 C54 18, 68 21, 74 24" stroke="rgba(251,245,238,0.7)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+            <!-- Upper Carafe Neck -->
+            <path d="M68 36 L92 115 L148 115 L172 36" fill="url(#carafeGlassGrad)" stroke="rgba(251,245,238,0.3)" stroke-width="2"/>
+
+            <!-- Chemex Style Wooden / Cork Insulated Collar with Leather Tie String -->
+            <rect x="86" y="115" width="68" height="30" rx="4" fill="url(#woodCollarGrad)" stroke="#3e2313" stroke-width="1.5"/>
+            <line x1="86" y1="123" x2="154" y2="123" stroke="#e4a877" stroke-width="1.2" opacity="0.6"/>
+            <line x1="86" y1="137" x2="154" y2="137" stroke="#361f10" stroke-width="1.2"/>
+            <!-- Leather knot and bead -->
+            <circle cx="120" cy="130" r="5" fill="#e8c07d" stroke="#5a351d" stroke-width="1.5"/>
+            <path d="M120 135 C122 144, 118 152, 116 160" stroke="#c28b5b" stroke-width="2" stroke-linecap="round"/>
+            <path d="M121 135 C125 142, 128 150, 127 158" stroke="#a06e44" stroke-width="1.8" stroke-linecap="round"/>
+
+            <!-- Ergonomic Glass Server Handle on right -->
+            <path d="M166 148 C202 162, 222 205, 214 255 C208 300, 186 335, 160 350" fill="none" stroke="rgba(251,245,238,0.35)" stroke-width="6" stroke-linecap="round"/>
+            <path d="M166 148 C202 162, 222 205, 214 255 C208 300, 186 335, 160 350" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round"/>
+
+            <!-- Lower Flared Conical Body (Wide Conical Decanter) -->
+            <path d="M88 145 C60 210, 22 320, 22 432 C22 458, 38 468, 120 468 C202 468, 218 458, 218 432 C218 320, 180 210, 152 145 Z" 
+                  fill="url(#carafeGlassGrad)" 
+                  stroke="rgba(251,245,238,0.4)" 
                   stroke-width="2.5"/>
 
-            <path d="M25 435 C25 455 45 464 110 464 C175 464 195 455 195 435 Z" fill="rgba(255,255,255,0.12)"/>
-            <line x1="30" y1="435" x2="190" y2="435" stroke="rgba(251,245,238,0.25)" stroke-width="1.5"/>
+            <!-- Reinforced Base -->
+            <path d="M28 432 C28 454, 48 463, 120 463 C192 463, 212 454, 212 432 Z" fill="rgba(255,255,255,0.12)"/>
+            <line x1="32" y1="432" x2="208" y2="432" stroke="rgba(251,245,238,0.25)" stroke-width="1.5"/>
+
+            <!-- Volumetric Gradation Markings etched on glass -->
+            <g class="carafe-gradations" stroke="rgba(251,245,238,0.5)" stroke-width="1.5" stroke-linecap="round">
+              <line x1="38" y1="230" x2="52" y2="230"/>
+              <text x="56" y="233" fill="rgba(251,245,238,0.75)" font-family="monospace" font-size="9" font-weight="700">600ml • 4 CUPS</text>
+              <line x1="33" y1="290" x2="47" y2="290"/>
+              <text x="51" y="293" fill="rgba(251,245,238,0.75)" font-family="monospace" font-size="9" font-weight="700">400ml • 3 CUPS</text>
+              <line x1="28" y1="350" x2="42" y2="350"/>
+              <text x="46" y="353" fill="rgba(251,245,238,0.75)" font-family="monospace" font-size="9" font-weight="700">200ml • 1 CUP</text>
+              <line x1="25" y1="410" x2="38" y2="410" stroke-dasharray="2,2"/>
+              <text x="42" y="413" fill="rgba(230,167,86,0.9)" font-family="monospace" font-size="8" font-weight="700">BLOOM 50ml</text>
+            </g>
+
+            <!-- Glass Left Reflection Highlight -->
+            <path d="M34 425 C32 340, 62 230, 88 160" stroke="rgba(255,255,255,0.3)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
           </svg>
 
-          <!-- Warping Cylinder Label -->
+          <!-- 2. Specialty Amber Bean Jar SVG Shell (Shown when toggled to Jar) -->
+          <svg class="vessel-glass-shell jar-shell" id="jarShellSvg" viewBox="0 0 240 480" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+            <defs>
+              <linearGradient id="woodLidGrad" x1="40" y1="30" x2="200" y2="70" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#ba7b4d"/>
+                <stop offset="50%" stop-color="#7e4a26"/>
+                <stop offset="100%" stop-color="#46250e"/>
+              </linearGradient>
+              <linearGradient id="amberGlassGrad" x1="0" y1="0" x2="240" y2="480" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="rgba(195,125,60,0.22)"/>
+                <stop offset="50%" stop-color="rgba(130,68,25,0.16)"/>
+                <stop offset="100%" stop-color="rgba(75,35,12,0.28)"/>
+              </linearGradient>
+            </defs>
+            <!-- Airtight Wooden Top Lid -->
+            <rect x="52" y="28" width="136" height="30" rx="6" fill="url(#woodLidGrad)" stroke="#381d0c" stroke-width="2"/>
+            <ellipse cx="120" cy="28" rx="68" ry="8" fill="#c48a5c"/>
+            <line x1="56" y1="46" x2="184" y2="46" stroke="#4a2a14" stroke-width="2"/>
+            <!-- Silicone seal gasket ring -->
+            <rect x="62" y="58" width="116" height="10" rx="2" fill="#e8dfd5" stroke="#a39686" stroke-width="1.5"/>
+            <!-- Brass Wire Bail Clamp Mechanism -->
+            <path d="M48 64 L48 95 C48 100, 56 104, 64 104 L176 104 C184 104, 192 100, 192 95 L192 64" fill="none" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="48" cy="95" r="4.5" fill="#ffd700"/>
+            <circle cx="192" cy="95" r="4.5" fill="#ffd700"/>
+            <!-- Amber Glass Canister Body -->
+            <rect x="42" y="68" width="156" height="385" rx="18" fill="url(#amberGlassGrad)" stroke="rgba(230,167,86,0.4)" stroke-width="2.5"/>
+            <!-- Reinforced Base -->
+            <rect x="48" y="435" width="144" height="18" rx="8" fill="rgba(255,255,255,0.08)"/>
+            <line x1="52" y1="435" x2="188" y2="435" stroke="rgba(230,167,86,0.3)" stroke-width="1.5"/>
+          </svg>
+
+          <!-- Warping Specialty Coffee Label with Embedded Dates & SCA Score -->
           <div class="vessel-label-wrap" id="vesselLabel">
-            <div class="label-header">
-              <span>SPECIALTY RESERVE</span>
-              <span id="labelAltitudeVal">2,150M</span>
+            <div class="label-badge-strip">
+              <span class="label-grade-badge">SPECIALTY GRADE</span>
+              <span class="label-score-badge" id="labelCupScore">89.5 PTS</span>
+              <span class="label-alt-badge" id="labelAltitudeVal">2,150M</span>
             </div>
 
             <div class="label-body">
               <div class="label-sub" id="labelOriginSub">ANAEROBIC WASHED</div>
               <h2 class="label-title" id="labelOriginTitle">IO VOLCANIC</h2>
-              <div style="font-size:0.75rem; color:var(--text-muted-on-cream); font-weight:600; margin-top:0.3rem;">
-                THE DAILY ROAST VAULT
+              <div class="label-terroir-tag" id="labelTerroir">YIRGACHEFFE • ETHIOPIA</div>
+            </div>
+
+            <!-- Embedded Coffee Dates Matrix -->
+            <div class="label-dates-block">
+              <div class="label-date-row">
+                <span class="lbl-k">ROAST DATE</span>
+                <span class="lbl-v" id="labelRoastDate">OCT 19, 2026</span>
+              </div>
+              <div class="label-date-row">
+                <span class="lbl-k">PEAK WINDOW</span>
+                <span class="lbl-v" id="labelPeakWindow">DAYS 5 — 21</span>
+              </div>
+              <div class="label-date-row">
+                <span class="lbl-k">HARVEST CROP</span>
+                <span class="lbl-v" id="labelHarvestCrop">NOV '25 – JAN '26</span>
               </div>
             </div>
 
             <div class="label-footer">
-              <div>
-                <span>LOT 04/26</span><br>
-                <span>BATCH #984</span>
+              <div class="label-meta-tags">
+                <span id="labelLotBatch">LOT 04/26 • BATCH #984</span>
+                <span class="nitro-tag">NITRO FLUSHED 🌿</span>
               </div>
               <div class="label-barcode">
                 <span style="height:100%;"></span>
@@ -172,54 +298,121 @@
             </div>
           </div>
 
+          <!-- Specular Light Sweep -->
           <div class="vessel-specular-sweep" id="vesselSpecular"></div>
+
+          <!-- Accompanying Artisan Ceramic Coffee Cup with Animated Rising Steam -->
+          <div class="artisan-cup-companion" id="artisanCupCompanion">
+            <!-- 3 Wisps of Meditative Rising Steam -->
+            <div class="steam-container">
+              <span class="steam-wisp wisp-1"></span>
+              <span class="steam-wisp wisp-2"></span>
+              <span class="steam-wisp wisp-3"></span>
+            </div>
+            
+            <!-- Artisan Ceramic Cup & Saucer SVG -->
+            <svg class="artisan-cup-svg" viewBox="0 0 150 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="cupGlazeGrad" x1="20" y1="30" x2="110" y2="90" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#3d2417"/>
+                  <stop offset="60%" stop-color="#22120a"/>
+                  <stop offset="100%" stop-color="#140a05"/>
+                </linearGradient>
+                <radialGradient id="cremaGrad" cx="65" cy="38" r="35" fx="60" fy="36" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#ca945e"/>
+                  <stop offset="40%" stop-color="#8c582c"/>
+                  <stop offset="100%" stop-color="#281107"/>
+                </radialGradient>
+              </defs>
+
+              <!-- Drop Shadow Under Saucer -->
+              <ellipse cx="68" cy="98" rx="60" ry="8" fill="rgba(0,0,0,0.55)"/>
+
+              <!-- Ceramic Saucer -->
+              <ellipse cx="68" cy="92" rx="56" ry="9" fill="#2a170e" stroke="#4a2a1a" stroke-width="1.8"/>
+              <ellipse cx="68" cy="90" rx="46" ry="6" fill="#1e1009"/>
+
+              <!-- Ceramic Ear Handle on the right -->
+              <path d="M98 46 C124 46, 134 72, 94 82" fill="none" stroke="#3d2417" stroke-width="7" stroke-linecap="round"/>
+              <path d="M98 46 C124 46, 134 72, 94 82" fill="none" stroke="#5a3825" stroke-width="2" stroke-linecap="round"/>
+
+              <!-- Cup Outer Body -->
+              <path d="M28 38 C32 75, 46 90, 68 90 C90 90, 104 75, 108 38 Z" fill="url(#cupGlazeGrad)" stroke="#4a2a1a" stroke-width="2"/>
+
+              <!-- Ceramic Rim Glaze Highlight -->
+              <ellipse cx="68" cy="38" rx="40" ry="9" fill="#22120a" stroke="#d5beaa" stroke-width="1.5"/>
+
+              <!-- Fresh Hot Coffee Liquid Surface & Crema -->
+              <ellipse cx="68" cy="39" rx="36" ry="7.5" fill="url(#cremaGrad)"/>
+              <!-- Crema Swirl Rings -->
+              <path d="M54 39 C58 37, 72 37, 78 40" stroke="#dfb689" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+              <ellipse cx="64" cy="38" rx="8" ry="2" fill="rgba(240, 200, 150, 0.35)"/>
+            </svg>
+          </div>
+
         </div>
 
         <div class="drag-hint-pill">
-          <span>⇄</span> Move mouse or drag bottle to inspect in 3D
+          <span>⇄</span> Move mouse or drag to inspect coffee carafe, jar & cup in 3D
         </div>
       </div>
 
-      <!-- Right Column: Jupiter Moons Origin Selector -->
+      <!-- Right Column: Jupiter Moons Origin Selector with Matching Coffee Dates -->
       <div class="jupiter-origins-selector">
         <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-muted); font-weight:700; margin-bottom:0.25rem;">
           Select Extraction Profile
         </div>
 
         <button class="origin-selector-btn active" onclick="switchJupiterOrigin(0)">
-          <div>
-            <span class="origin-btn-num">01 / VOLCANIC</span>
+          <div class="origin-btn-info">
+            <div class="origin-btn-header">
+              <span class="origin-btn-num">01 / VOLCANIC</span>
+              <span class="origin-date-badge">🔥 Roasted Oct 19</span>
+            </div>
             <span class="origin-btn-title">IO Volcanic</span>
             <span class="origin-btn-profile">Peach Nectar & Jasmine • High Focus</span>
+            <span class="origin-btn-meta">Peak: Day 2 • Score: 89.5</span>
           </div>
-          <span style="font-size:1.25rem;">›</span>
+          <span class="origin-arrow">›</span>
         </button>
 
         <button class="origin-selector-btn" onclick="switchJupiterOrigin(1)">
-          <div>
-            <span class="origin-btn-num">02 / GLACIAL</span>
+          <div class="origin-btn-info">
+            <div class="origin-btn-header">
+              <span class="origin-btn-num">02 / GLACIAL</span>
+              <span class="origin-date-badge">🔥 Roasted Oct 18</span>
+            </div>
             <span class="origin-btn-title">Europa Glacial</span>
             <span class="origin-btn-profile">Green Apple & Cacao • Flow State</span>
+            <span class="origin-btn-meta">Peak: Day 3 • Score: 88.8</span>
           </div>
-          <span style="font-size:1.25rem;">›</span>
+          <span class="origin-arrow">›</span>
         </button>
 
         <button class="origin-selector-btn" onclick="switchJupiterOrigin(2)">
-          <div>
-            <span class="origin-btn-num">03 / OBSIDIAN</span>
+          <div class="origin-btn-info">
+            <div class="origin-btn-header">
+              <span class="origin-btn-num">03 / OBSIDIAN</span>
+              <span class="origin-date-badge">🔥 Roasted Oct 16</span>
+            </div>
             <span class="origin-btn-title">Ganymede Obsidian</span>
             <span class="origin-btn-profile">Dark Choc & Pecan • Grounding Body</span>
+            <span class="origin-btn-meta">Peak: Day 5 • Score: 90.3</span>
           </div>
-          <span style="font-size:1.25rem;">›</span>
+          <span class="origin-arrow">›</span>
         </button>
 
         <button class="origin-selector-btn" onclick="switchJupiterOrigin(3)">
-          <div>
-            <span class="origin-btn-num">04 / MIDNIGHT</span>
+          <div class="origin-btn-info">
+            <div class="origin-btn-header">
+              <span class="origin-btn-num">04 / MIDNIGHT</span>
+              <span class="origin-date-badge">🔥 Roasted Oct 20</span>
+            </div>
             <span class="origin-btn-title">Callisto Decaf</span>
             <span class="origin-btn-profile">Hazelnut & Lavender • REM Safe</span>
+            <span class="origin-btn-meta">Peak: Day 1 • Score: 87.5</span>
           </div>
-          <span style="font-size:1.25rem;">›</span>
+          <span class="origin-arrow">›</span>
         </button>
       </div>
 

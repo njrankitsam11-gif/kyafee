@@ -71,6 +71,7 @@ const JUPITER_ORIGINS = [
     code: "IO VOLCANIC",
     title: "IO • Volcanic Anaerobic",
     origin: "Ethiopia Yirgacheffe • Micro-Lot 2,150m",
+    terroir: "YIRGACHEFFE • ETHIOPIA",
     notes: "Peach Nectar, Wild Jasmine, Meyer Lemon Zest, Golden Honey",
     altitude: "2,150m",
     process: "Anaerobic Washed",
@@ -79,9 +80,17 @@ const JUPITER_ORIGINS = [
     primaryColor: "#e6a756",
     glowColor: "rgba(230, 167, 86, 0.32)",
     liquidColor: "#7d421b",
+    cupScore: "89.5 PTS",
+    roastDate: "Oct 19, 2026",
+    daysOffRoast: "2 Days Ago",
+    freshnessStatus: "🔥 Roasted 2 Days Ago • Peak Flavor Window Active",
+    peakWindow: "Days 5 — 21",
+    harvestCrop: "Nov '25 – Jan '26",
+    degasStatus: "Optimal Bloom (94%)",
+    lotBatch: "LOT 04/26 • BATCH #984",
     tag1: "Habit Swap: Morning Cigarette",
     tag2: "Notes: Peach & Jasmine",
-    tag3: "Altitude: 2,150m"
+    tag3: "🔥 Roasted 2 Days Ago"
   },
   {
     id: "europa",
@@ -89,6 +98,7 @@ const JUPITER_ORIGINS = [
     code: "EUROPA GLACIAL",
     title: "EUROPA • Glacial Cold Wash",
     origin: "Colombia Huila • Thermal Shock 1,950m",
+    terroir: "HUILA • COLOMBIA",
     notes: "Crisp Green Apple, Raw Cacao Nibs, Cane Sugar, Silky Malic Acidity",
     altitude: "1,950m",
     process: "Cold Fermentation",
@@ -97,9 +107,17 @@ const JUPITER_ORIGINS = [
     primaryColor: "#48bb78",
     glowColor: "rgba(72, 187, 120, 0.30)",
     liquidColor: "#57351c",
+    cupScore: "88.8 PTS",
+    roastDate: "Oct 18, 2026",
+    daysOffRoast: "3 Days Ago",
+    freshnessStatus: "🔥 Roasted 3 Days Ago • Peak Crisp Acidity Window",
+    peakWindow: "Days 6 — 24",
+    harvestCrop: "Dec '25 – Feb '26",
+    degasStatus: "Sweet Bloom (91%)",
+    lotBatch: "LOT 08/26 • BATCH #104",
     tag1: "Habit Swap: 3 PM Work Smoke",
     tag2: "Notes: Green Apple & Cacao",
-    tag3: "Process: Cold Wash"
+    tag3: "🔥 Roasted 3 Days Ago"
   },
   {
     id: "ganymede",
@@ -107,6 +125,7 @@ const JUPITER_ORIGINS = [
     code: "GANYMEDE OBSIDIAN",
     title: "GANYMEDE • Obsidian Honey",
     origin: "Guatemala Huehuetenango • High Grown 1,850m",
+    terroir: "HUEHUETENANGO • GUATEMALA",
     notes: "85% Dark Chocolate, Toasted Pecan, Molasses, Velvety Mouthfeel",
     altitude: "1,850m",
     process: "Black Honey",
@@ -115,9 +134,17 @@ const JUPITER_ORIGINS = [
     primaryColor: "#ed8936",
     glowColor: "rgba(237, 137, 54, 0.32)",
     liquidColor: "#3d1e11",
+    cupScore: "90.3 PTS",
+    roastDate: "Oct 16, 2026",
+    daysOffRoast: "5 Days Ago",
+    freshnessStatus: "🔥 Roasted 5 Days Ago • Peak Body & Chocolate Bloom",
+    peakWindow: "Days 7 — 28",
+    harvestCrop: "Jan '26 – Mar '26",
+    degasStatus: "Fully Degassed (97%)",
+    lotBatch: "LOT 12/26 • BATCH #632",
     tag1: "Habit Swap: Fidgety Hands",
     tag2: "Notes: Dark Choc & Pecan",
-    tag3: "Body: Heavy Velvet"
+    tag3: "🔥 Roasted 5 Days Ago"
   },
   {
     id: "callisto",
@@ -125,6 +152,7 @@ const JUPITER_ORIGINS = [
     code: "CALLISTO DECAF",
     title: "CALLISTO • Midnight Decaf",
     origin: "Swiss-Water Colombia • 99.9% Caffeine-Free",
+    terroir: "SWISS-WATER • COLOMBIA",
     notes: "Roasted Hazelnut, Brown Sugar, Lavender Bud, Chamomile Finish",
     altitude: "1,750m",
     process: "Swiss-Water Organic",
@@ -133,13 +161,22 @@ const JUPITER_ORIGINS = [
     primaryColor: "#b794f4",
     glowColor: "rgba(183, 148, 244, 0.30)",
     liquidColor: "#432517",
+    cupScore: "87.5 PTS",
+    roastDate: "Oct 20, 2026",
+    daysOffRoast: "1 Day Ago",
+    freshnessStatus: "🔥 Roasted Yesterday • Gentle Chamomile Aroma",
+    peakWindow: "Days 4 — 18",
+    harvestCrop: "Feb '26 – Apr '26",
+    degasStatus: "Fresh Degas (89%)",
+    lotBatch: "LOT 01/26 • BATCH #441",
     tag1: "Habit Swap: 8 PM Wine / Beer",
     tag2: "Notes: Hazelnut & Lavender",
-    tag3: "Sleep: 100% REM Safe"
+    tag3: "🔥 Roasted 1 Day Ago"
   }
 ];
 
 let activeOriginIndex = 0;
+let currentVesselMode = "carafe";
 let vesselRotX = 0;
 let vesselRotY = 0;
 let targetRotX = 0;
@@ -147,6 +184,34 @@ let targetRotY = 0;
 let dragStartX = 0;
 let isDraggingVessel = false;
 let dragCurrentRotY = 0;
+
+function setVesselMode(mode) {
+  if (currentVesselMode === mode) return;
+  currentVesselMode = mode;
+  sounds.playScaleTare();
+
+  const vessel = document.getElementById("vesselCylinder");
+  const carafeSvg = document.getElementById("carafeShellSvg");
+  const jarSvg = document.getElementById("jarShellSvg");
+  const btnCarafe = document.getElementById("btnToggleCarafe");
+  const btnJar = document.getElementById("btnToggleJar");
+
+  if (mode === "carafe") {
+    vessel?.classList.remove("vessel-mode-jar");
+    vessel?.classList.add("vessel-mode-carafe");
+    if (carafeSvg) carafeSvg.style.display = "block";
+    if (jarSvg) jarSvg.style.display = "none";
+    btnCarafe?.classList.add("active");
+    btnJar?.classList.remove("active");
+  } else {
+    vessel?.classList.remove("vessel-mode-carafe");
+    vessel?.classList.add("vessel-mode-jar");
+    if (carafeSvg) carafeSvg.style.display = "none";
+    if (jarSvg) jarSvg.style.display = "block";
+    btnCarafe?.classList.remove("active");
+    btnJar?.classList.add("active");
+  }
+}
 
 function initJupiterVessel() {
   const container = document.getElementById("jupiterShowcase");
@@ -224,6 +289,13 @@ function vesselRenderLoop() {
   if (tag2) tag2.style.transform = `translateZ(90px) translate(${vesselRotY * 1.4}px, ${-vesselRotX * 0.9}px)`;
   if (tag3) tag3.style.transform = `translateZ(60px) translate(${-vesselRotY * 0.9}px, ${vesselRotX * 0.7}px)`;
 
+  const companionCup = document.getElementById("artisanCupCompanion");
+  if (companionCup) {
+    const cupOffsetX = -vesselRotY * 0.9;
+    const cupOffsetY = -vesselRotX * 0.6;
+    companionCup.style.transform = `translateZ(65px) translate(${cupOffsetX}px, ${cupOffsetY}px) rotateY(${vesselRotY * 0.4}deg)`;
+  }
+
   drawLiquidWave(vesselRotY, vesselRotX);
 
   requestAnimationFrame(vesselRenderLoop);
@@ -233,8 +305,8 @@ let waveTime = 0;
 function initLiquidCanvas() {
   const canvas = document.getElementById("liquidCanvas");
   if (!canvas) return;
-  canvas.width = 184 * window.devicePixelRatio || 184;
-  canvas.height = 310 * window.devicePixelRatio || 310;
+  canvas.width = 200 * (window.devicePixelRatio || 1);
+  canvas.height = 310 * (window.devicePixelRatio || 1);
 }
 
 function drawLiquidWave(rotY, rotX) {
@@ -323,13 +395,39 @@ function switchJupiterOrigin(index) {
   if (originCaffeine) originCaffeine.textContent = origin.caffeine;
   if (originDopamine) originDopamine.textContent = origin.dopamine;
 
+  // Update Coffee Dates & Freshness Index
+  const roastDateEl = document.getElementById("jupiterRoastDate");
+  const peakWindowEl = document.getElementById("jupiterPeakWindow");
+  const harvestDateEl = document.getElementById("jupiterHarvestDate");
+  const degasStatusEl = document.getElementById("jupiterDegasStatus");
+  const freshnessStatusEl = document.getElementById("datesFreshnessStatus");
+
+  if (roastDateEl) roastDateEl.textContent = origin.roastDate;
+  if (peakWindowEl) peakWindowEl.textContent = origin.peakWindow;
+  if (harvestDateEl) harvestDateEl.textContent = origin.harvestCrop;
+  if (degasStatusEl) degasStatusEl.textContent = origin.degasStatus;
+  if (freshnessStatusEl) freshnessStatusEl.textContent = origin.freshnessStatus;
+
+  // Update Vessel Specialty Label Dates & Micro-lot Info
   const labelTitle = document.getElementById("labelOriginTitle");
   const labelSub = document.getElementById("labelOriginSub");
   const labelAltitude = document.getElementById("labelAltitudeVal");
+  const lblRoast = document.getElementById("labelRoastDate");
+  const lblPeak = document.getElementById("labelPeakWindow");
+  const lblHarvest = document.getElementById("labelHarvestCrop");
+  const lblScore = document.getElementById("labelCupScore");
+  const lblTerroir = document.getElementById("labelTerroir");
+  const lblLotBatch = document.getElementById("labelLotBatch");
 
   if (labelTitle) labelTitle.textContent = origin.code;
   if (labelSub) labelSub.textContent = origin.process;
   if (labelAltitude) labelAltitude.textContent = origin.altitude;
+  if (lblRoast) lblRoast.textContent = origin.roastDate.toUpperCase();
+  if (lblPeak) lblPeak.textContent = origin.peakWindow.toUpperCase();
+  if (lblHarvest) lblHarvest.textContent = origin.harvestCrop.toUpperCase();
+  if (lblScore) lblScore.textContent = origin.cupScore;
+  if (lblTerroir) lblTerroir.textContent = origin.terroir;
+  if (lblLotBatch) lblLotBatch.textContent = origin.lotBatch;
 
   const tag1Text = document.getElementById("tag1Text");
   const tag2Text = document.getElementById("tag2Text");
